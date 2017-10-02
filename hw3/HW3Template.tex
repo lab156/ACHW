@@ -1,0 +1,246 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,color,amssymb,amsthm,mathrsfs,verbatim,tikz,graphicx}
+\usepackage[margin=2.5cm]{geometry}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{fact}{Fact}
+\newtheorem{example}{Example}
+\newtheorem*{ex}{Exercise}
+\newtheorem*{soln}{Solution}
+\newtheorem*{prob}{Problem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{theorem}
+\newtheorem{thm}{Theorem}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\Proj}{\mathbb{P}}
+\newcommand{\HP}{\mathbb{H}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Pic}{\mbox{Pic}}
+\newcommand{\Div}{\mbox{Div}}
+\newcommand{\T}{\mathcal{T}}
+
+\begin{document}
+
+\title{Advanced Calculus HW 3 - Due September 22, 4pm}
+\author{Luis Berlioz}
+\maketitle
+
+
+
+\begin{prob}[1]
+Let $\S = \{ \mathbb{Y} \subset \N \ :\  \mathbb{Y} \text{ has a finite number of elements}\}.$ Prove that the set $\mathbb{S}$ is countable and give a scheme for counting all the elements of the set $\mathbb{S}.$
+\end{prob}
+\begin{soln}
+    In order to prove this note that if $\mathbb{Y} \in \S$ then $\mathbb{Y} $ is of the form: $\mathbb{Y} =\{m_1,\ldots, m_n\}$ where we assume that  $m_1\leq \cdots \leq m_k\leq \cdots \leq m_n \in \N$ for $1\leq z\leq n$. To show that $\S$ is countable, let $p_1,\ldots,p_n$ be the first $n$ prime numbers, define: $j(\mathbb{Y} ) = p_1^{m_n}\cdot\ldots\cdot p_n^{m_n}$. Observe that $j:\ \S \to \N$ is an injection, since assumming otherwise would imply that the natural number $j(\mathbb{Y})$ has two different prime factorizations. 
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[2]
+Prove that every real number $r$ in the real interval $(0,1]$ has a unique convergent binary expansion $r = \sum_{i \in \N} 2^{-a_i},$ where $\{a_i \ : \ i \in \N \}$ is a subsequence of $\N$. [Hint: Question 3 of homework 2.]\\
+Hence, or otherwise, prove that every positive real number has a unique binary expansion $r = \sum_{i \in \N} 2^{-a_i},$ where $\{ a_i \ : \ i \in \N\}$ is a subsequence of $\Z$ (i.e. the map $\N \to \Z$ which takes $j \in \N$ to $a_j \in \Z$ is strictly increasing).\\
+Also determine, with proof, the binary expansions of $p = \frac{1000}{7}$ and $\frac{8192}{11}.$
+\end{prob}
+\begin{soln}
+    We define $b_{0} =0$ and for $n>0$:
+    $$b_n =\begin{cases} 1 & \text{ if: } \sum_{i=0}^{n-1} b_i 2^{-i} + 2^{-n} <r\\ 0 & \text{otherwise}\end{cases}$$
+        We will prove that for all $n\geq 0$, $r$ is in the interval:
+        \begin{equation}\label{int}
+            \left(\left.\sum_{i=0}^{n-1} b_i2^{-i} , \sum_{i=0}^{n-1} b_i2^{-i} + 2^{-n+1}\right]\right.
+        \end{equation}
+            When $n=1$: The interval is  (0, $2^{-1+1}$] which of course contains all numbers of interest.
+
+            If we now assume it for $n$, then for $n+1$ there are two possibilities :
+        \begin{description}
+            \item[Case $b_{n} = 0$:] Then:
+                $$\sum_{i=0}^{n} b_i2^{-i} = \sum_{i=0}^{n-1} b_i2^{-i} < r$$
+                By assumption. And also by assumption and by the definition of $b_n$: 
+                $$ \sum_{i=0}^{n} b_i2^{-i} + 2^{-n} = \sum_{i=0}^{n-1} b_i2^{-i}+ 2^{-n}\geq r $$
+            \item[Case $b_n = 1$:] In this case by definition of $b_n$ we still get:
+                $$\sum_{i=0}^{n} b_i2^{-i} = \sum_{i=0}^{n-1} b_i2^{-i} + 2^{-n} < r $$
+The other side of the interval also checks:
+                $$\sum_{i=0}^{n} b_i2^{-i}+2^{-n} = \sum_{i=0}^{n-1} b_i2^{-i} +2\, 2^{-n}\leq r$$
+        \end{description}
+        As the hint states, this is the situation of the homework last week. The intervals in (\ref{int}) are clearly nested, and thus converge to $\sum_{i=0}^{\infty} b_i2^{-i} $. And by the squeeze theorem (the interval has always has measure $2^{-n+1}$), this sum is equal to $r$.
+
+        Observe that 1000/7 = 142 + 6/7 to convert the integer part to binary, observe that:
+        $$142 = 2^7 + 2^3+ 2^2 + 2$$
+        And that:
+        \begin{align*}
+            \frac 67 2 = \frac{12}7 &= 1+ \frac 57\\
+            \frac 57 2 = \frac{10}7 &= 1+ \frac 37\\
+            \frac 37 2 = \frac{6}7 &= 0+ \frac 67\\
+        \end{align*}
+        Since we get 6/7 again this means the pattern repeats from this point on and thus: $$6/7 = 2^{-1} + 2^{-2}+ 2^{-4}+ 2^{-5} + (2^{-(3n+1)}+2^{-(3n+2)})+\ldots$$
+
+        For the next number we have: $8192/11= 744 + 8/11$. First, the integer part:
+        $$744 = 2^3+2^5+2^6+2^7+2^9$$
+        And for the rest:
+        \begin{align*}
+            \frac 8{11} 2 = \frac{16}{11} &= 1+ \frac 5{11}\\
+            \frac 5{11} 2 = \frac{10}{11} &= 0+ \frac {10}{11}\\
+            \frac 9{11} 2 = \frac{18}{11} &= 1+ \frac 9{11}\\
+            \frac 9{11} 2 = \frac{6}{11} &= 1+ \frac 7{11}\\
+            \frac 7{11} 2 = \frac{14}{11} &= 1+ \frac 3{11}\\
+            \frac 3{11} 2 = \frac{6}{11} &= 0+ \frac 6{11}\\
+            \frac 6{11} 2 = \frac{12}{11} &= 1+ \frac {1}{11}\\
+            \frac 1{11} 2 = \frac{2}{11} &= 0+ \frac {2}{11}\\
+            \frac 2{11} 2 = \frac{4}{11} &= 0+ \frac {4}{11}\\
+            \frac 4{11} 2 = \frac{8}{11} &= 0+ \frac {8}{11}\\
+        \end{align*}
+        At which point starts repeating. This means:
+        $$\frac 8{11} = 2^{-10n +1}+2^{-10n +3}+2^{-10n +4}+2^{-10n +5}+2^{-10n +7}$$
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[3: Pugh \#*32 p. 49]
+Suppose that $E$ is a convex region in the plane bounded by a curve $C$.
+\begin{enumerate}
+    \item Show that $C$ has a tangent line except at a countable number of points. [For example, the circle has a tangent line at all points, the triangle has a tangent line at all except three, etc.]
+    \item Similarly, show that a convex function has a derivative except at a countable set of points.
+\end{enumerate}
+\end{prob}
+\begin{soln}
+
+\end{soln}
+\vspace{1in}
+
+\begin{prob}[4: Pugh \#*33 p. 50]
+Let $f(k,m)$ be the number of $k$-dimensional faces of the $m$-cube. See the table below.
+\[
+\begin{tabular}{||c||c|c|c|c|c|c|c|c||}
+\hline
+& m=1 & m=2 & m=3 & m=4 & m=5 & \ldots & m & m+1\\
+\hline
+\hline
+k=0 & 2 & 4 & 8 & f(0,4) & f(0,5) & \ldots & f(0,m) & f(0,m+1)\\
+\hline
+k=1 & 1 & 4 & 12 & f(1,4) & f(1,5) & \ldots & f(1,m) & f(1,m+1)\\
+\hline
+k=2 & 0 & 1 & 6 & f(2,4) & f(2,5) & \ldots & f(2,m) & f(2,m+1)\\
+\hline
+k=3 & 0 & 0 & 1 & f(3,4) & f(3,5) & \ldots & f(3,m) & f(3,m+1) \\
+\hline
+k=4 & 0 & 0 & 0 & f(4,4) & f(4,5) & \ldots & f(4,m) & f(4, m+1)\\
+\hline
+\end{tabular}\]
+Here $f(k,m)$ is the number of $k$-dimensional faces of the $m$-cube.
+\begin{enumerate}
+    \item Verify the numbers in the first three columns.
+    \item Calculate the columns $m=4$ and $m=5$, and give the formula for passing from the $m^\text{th}$ column to the $(m+1)^{\text{st}}$.
+    \item What would an $m=0$ column mean?
+    \item Prove that the alternating sum of the entries in any column is 1. That is, $2-1=1$, $4-4+1=1$, $8-12+6-1=1$, and in general $$\sum_k (-1)^k f(k,m) = 1.$$ This alternating sum is called the \emph{Euler characteristic}.
+\end{enumerate}
+\end{prob}
+\begin{soln}
+
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[5: Pugh \#41 p. 52]
+If $v$ is a value of a continuous function $f: [a,b] \to \R$ use the Least Upper Bound Property to prove that there are smallest and largest $x \in [a,b]$ such that $f(x) = v$.
+\end{prob}
+\begin{soln}
+    Since $f$ is continuous, we know that $A$ being open  implies  that $f^{-1}(A)$ is also open relative to $[a,b]$. Equivalently, $\R\setminus A$ is closed and therefore $[a,b] \setminus f^{-1}( A)$ is also a closed set. 
+
+    Finally, since the set $\{v\}$ is closed in $\R$, then $f^{-1}(\{v\}) $ is closed and bounded (since it is a subset of $[a,b]$), thus has a minimum and maximum.
+
+
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[6: Pugh \#*44 p. 52]
+Define injections $f: \N \to \N$ and $g: \N \to \N$ by $f(n) = 2n$ and $g(n) = 2n$. From $f$ and $g$, the Schroeder-Bernstein Theorem produces a bijection $\N \to \N$. What is it? 
+\end{prob}
+\begin{soln}
+
+\end{soln}
+\vspace{1in}
+
+\begin{prob}[7: Pugh \#*45 p. 52]
+Let $(a_n)$ be a sequence of real numbers. It is \emph{bounded} if the set $A = \{a_1,a_n,\ldots \}$ is bounded. The \emph{limit supremum} or $\lim \sup$, of a bounded sequence $(a_n)$ as $n \to \infty$ is $$\underset{n \to \infty}{\lim \sup} a_n = \lim_{n \to \infty} \left( \sup_{k \geq n} a_k \right).$$
+\begin{enumerate}
+    \item Why does the $\lim \sup$ exist?
+    \item If $\sup \{a_n\} = \infty$, how should we define $\underset{n \to \infty}{\lim \sup}\ a_n$?
+    \item If $\lim_{n \to \infty} a_n = -\infty$, how should we define $\lim \sup \ a_n$?
+    \item When is it true that
+    \begin{align*}
+        \underset{n \to \infty}{\lim \sup} (a_n + b_n) & \leq \underset{n \to \infty}{\lim \sup}\  a_n + \underset{n \to \infty}{\lim \sup}\ b_n\\
+        \underset{n \to \infty}{\lim \sup}\  ca_n & = \underset{n \to \infty}{\lim \sup} \ a_n?
+    \end{align*}
+    When is it true they are unequal? Draw pictures that illustrate these relations.
+    \item Define the \emph{limit infimum}, or $\lim \inf$, of a sequence of real numbers, and find a formula relating it to the $\lim \sup$.
+    \item Prove that $\lim_{n \to \infty} a_n$ exists if and only if the sequence $(a_n)$ is bounded and $\underset{n \to \infty}{\lim \sup}\ a_n = \underset{n \to \infty}{\lim \inf}\ a_n.$
+\end{enumerate}
+\end{prob}
+\begin{soln}
+    \begin{enumerate}
+        \item Note that $\lim \sup$ of a sequence always exists. If the sequence is unbounded above, we deal with that case in part 2 below. On the other hand, if $\sup\{a_k\}<\infty$ then: $s_n=\sup_{n\leq k}\{a_k\}$ is monotone decreasing. Therefore it  has a limit when $n\to \infty$ may it be $-\infty$ or a real number.
+        \item In the case where $\sup\{a_k\}=\infty$, then $\sup_{n\leq k}\{a_k\}= \infty$ for all $n\in \N$ since $a_k$ is a sequence of real numbers and thus it can only tend to infinity through an unbounded subsequence. In this case we get:
+            $$\underset{n \to \infty}{\lim \sup}\ a_n = \lim_{n \to \infty} \left( \sup_{k \geq n} a_k \right)= \lim_{n\to \infty} \infty = \infty$$
+        \item Consider a sequence such that $\lim_{n \to \infty} a_n = -\infty$. In this case, for any $L$ there exists an $N$ such that $n\geq N$ implies that $a_n<L$. Therefore, $\sup_{k\geq N}a_k\leq L$ and this also implies that $\sup_{k\geq n}a_k \to -\infty$ as $n\to \infty$.
+        \item For the first one:
+        $$\underset{n \to \infty}{\lim \sup} (a_n + b_n)  \leq \underset{n \to \infty}{\lim \sup}\  a_n + \underset{n \to \infty}{\lim \sup}\ b_n$$
+            This is true for any two sequences of real numbers because for any $n\in \N$, we have:
+            $$\sup_{k\geq n} (a_k+b_k) \leq \sup_{k\geq n} a_k+ \sup_{k\geq n} b_k$$
+            The inequality happens in the case in which the maximums of the sequence don't happen at the same indices and thus they are not ``synchronized'', as an example take $a_n=(-1)^n$ and $b_n=(-1)^{n+1}$.  Observe that $a_n+b_n=0$, then $\underset{n \to \infty}{\lim \sup} (a_n + b_n) = 0$; nevertheless:    $$\underset{n \to \infty}{\lim \sup}\  a_n + \underset{n \to \infty}{\lim \sup}\ b_n = 2$$
+
+            The second one is true whenever $c\geq 0$. This is because clearly:
+            $$\sup_{k\geq n} ca_k= c\sup_{k\geq n} a_k$$
+            For all $n\in \N$. And in the case that $c<0$ we get that the value will not be the same whenever the normal limit does not exist, since in this case (as we show below) the $\limsup$ and the $\liminf$ get swapped.    
+        \item Define the $\liminf$ as:
+            $$\liminf_{n\to \infty} a_n = \lim_{n\to \infty} \inf_{n\leq k}a_k$$
+            There are two formulas that I think relate these two operators:
+            \begin{gather*}
+                \liminf_{n\to \infty} a_n \leq \limsup_{n\to \infty} a_n\\
+                \limsup_{n\to \infty} (-1 a_n) = -\liminf_{n\to \infty} a_n
+            \end{gather*}
+            The first one is true just because for any $n\in \N$ $\inf_{k\geq n} a_k= \sup_{k\geq n} a_k$. For the second one, we just need to notice that:
+            $$\limsup_{n\to \infty} (-a_n) = \lim_{n\to \infty} \sup_{k\geq n} (-a_n) =-\lim_{n\to \infty} \inf_{k\geq n} (a_n) =- \liminf_{n\to \infty} a_n  $$
+
+    \end{enumerate}
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[8: Pugh \#47 p. 53]
+Assume that $V$ is an inner product space whose inner product induces a norm as $|x| = \sqrt{\langle x, x \rangle}$.
+\begin{enumerate}
+    \item Show that $|\cdot |$ obeys the \emph{parallelogram law} $$|x+y|^2 + |x-y|^2 = 2|x|^2 + 2|y|^2$$ for all $x,y \in V$.
+    \item (*) Show that any norm obeying the parallelogram law arises from a unique inner product. [Hints: Define the prospective inner product as $$\langle x, y \rangle = \left| \frac{x+y}{2} \right|^2 - \left| \frac{x-y}{2} \right|^2.$$ Check that $\langle, \rangle$ satisfies the inner product properties of symmetry and positive definiteness (easy). Also, it is clear that $|x|^2 = \langle x, x \rangle$, so $\langle, \rangle$ will induce the norm. Checking bilinearity is more difficult.
+    \begin{enumerate}
+        \item Let $x,y,z \in V$ be arbitrary. Show that the parallelogram law implies $$\langle x+y,z \rangle + \langle x-y,z \rangle = 2 \langle x, z \rangle,$$ and infer that $\langle 2x,z \rangle = 2 \langle x, z \rangle$. For arbitrary $u,v \in V$, set $x = \frac{1}{2}(u + v)$ and $y = \frac{1}{2}(u-v)$, plug in to the previous equation and deduce that $$\langle u,z \rangle + \langle v,z \rangle = \langle u+v,z \rangle,$$ which is additive bilinearity in the first variable. Why does it now follow at once that $\langle, \rangle$ is also additively bilinear in the second variable?
+        \item To check multiplicative bilinearity, prove by induction that if $m \in \Z$ then $m \langle x, y \rangle = \langle mx, y \rangle$, and if $n \in \N$ then $\frac{1}{n} \langle x, y \rangle = \langle \frac{1}{n}x, y \rangle$. Infer that $r \langle x, y \rangle = \langle rx, y \rangle$ when $r$ is rational. Is $\lambda \mapsto \langle \lambda x, y \rangle - \lambda \langle x, y \rangle$ a continuous function of $\lambda \in \R$, and does this give multiplicative bilinearity?]
+    \end{enumerate}
+\end{enumerate}
+\end{prob}
+\begin{soln}
+
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[9: Pugh \#50 p. 54]
+The Klein bottle is a surface that has an oval of self-intersection when it is shown in 3-space. See the figure in the text. It can live in 4-space with no self-intersection. How?
+\end{prob}
+\begin{soln}
+    It is the same situation as with the knot, in $\R^3$, the knot is a closed curve with no self intersection. When projected to the plane, it necessarily has intersections or else it would be ``unknotted''. Similarly, Klein's curve is a closed surface in $\R^4$ with no intersections. The projection in $\R^3$ has  intersections but this is only because what are different points in $\R^4$ get ``crushed'' together when projected into $\R^3$ just like the whole $z$ axis becomes a point when projected into the $x-y$ plane. And just as this point can be ``lifted'' to become the whole $z$-axis in $\R^3$, the parts of the ellipse that appear to be one over the other (including the ellipse of intersection) can be given its own space in $\R^4$.
+
+\end{soln}
+
+\end{document}

@@ -1,0 +1,10 @@
+#IGNORE VIMs TEMPORARY AND SWAP FILES
+*.swp
+*~
+#IGNORE PYTHONs EXECUTION FILES
+__pycache__
+#PDFs FILES
+*.pdf
+#LATEX Aux files
+*.aux
+*.log

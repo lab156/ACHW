@@ -1,0 +1,207 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,color,amssymb,amsthm,mathrsfs,verbatim,tikz,graphicx}
+\usepackage[margin=2.5cm]{geometry}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{fact}{Fact}
+\newtheorem{example}{Example}
+\newtheorem*{ex}{Exercise}
+\newtheorem*{soln}{Solution}
+\newtheorem*{prob}{Problem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{theorem}
+\newtheorem{thm}{Theorem}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Proj}{\mathbb{P}}
+\newcommand{\HP}{\mathbb{H}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Pic}{\mbox{Pic}}
+\newcommand{\Div}{\mbox{Div}}
+\newcommand{\T}{\mathcal{T}}
+
+\begin{document}
+
+\title{Advanced Calculus HW 1 - Due September 6}
+\author{Luis Berlioz}
+\maketitle
+
+
+
+\begin{prob}[Lemma from Notes]
+Prove the following lemma:
+\begin{lemma}
+If $X$ and $Y$ are in $\R^+$, then $X \leq Y$ if and only if $Y \subset X$.
+\end{lemma}
+\end{prob}
+\begin{soln}
+	First, we assume that $X,\ Y\in \R^+$ and $X\leq Y$. The inequality is equivalent to saying that for all $(y_1,y_2) \in Y$ there exists $(x_1,x_2) \in X$ such that $(x_1,x_2) < (y_1, y_2)$. Since we know that $X$ is right-complete and ``$(y_1, y_2)< (x_1,x_2)$ is false'', then $(y_1,y_2)\in X$. This means that $Y\leq X$.
+
+	Next, assume that $Y\subset X$ (we are also assuming they are in $\R^+$). According to the left-openness property, for all $(y_1,y_2)$ there exists another element of $Y$ that we call $(y_1', y_2')$ and that satisfies:
+	$$(y_1', y_2')<(y_1,y_2)$$
+	We are working under that assumption that $Y$ is a subset of $X$, thus $(y_1', y_2')\in X$. Since the choice of $(y_1, y_2)$ was arbitrary, we get $X\leq Y$. 
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[Reals have LBP]
+Prove that the reals, as described, have the lower bound property: any set of positive reals has a greatest lower bound.
+\end{prob}
+\begin{soln}
+	First, we will show that the arbitrary union of  elements in $\R^+$ is also in $\R^+$. Let $I$ be any index set and $ X_i\in \R^+$ for all $i\in I$:
+	$$ X = \cup_{i\in I} X_i $$
+	We must show two things:
+	\begin{description}
+		\item[$\cup_{i\in I} X_i$ is left-open: ] Let $(p,q) \in \cup_{i\in I} X_i $, then it must be the case that $(p,q)\in X_i$ for some $i \in I$. Then, using that $X_i$ is left-open, there exists $(r,s) \in X_i \subset \cup_{i\in I} X_i$ such that $(r,s)<(p,q)$.  
+		\item[$\cup_{i\in I} X_i$ is right-complete:] Suppose that for some $(p,q) \in \cup_{i\in I} X_i$ we have that $(s,t)\geq (p,q)$. Since $(p,q)\in X_i$ for some $i\in I$ and we know that $X_i$ is right complete, then we get that $(s,t)\in \cup_{i\in I} X_i$ and thus it is also right-complete.
+	\end{description}
+	Let $Y$ be a lower bound for the set $\{ X_i :\ i\in I\}$ such that:
+	$\cup_{i\in I} X_i \leq Y$ this is equivalent to $\cup_{i\in I} X_i \supset Y$.
+
+	On the other hand, since $Y\leq X_i$ for all $i\in I$, we have that $Y\supset X_i$ for all $i\in I$. But this means that $Y\supset \cup_{i\in I} X_i$ which is equivalent to $Y\leq \cup_{i\in I} X_i$. Therefore, $Y= \cup_{i\in I} X_i$, in other words, $\cup_{i\in I} X_i$ is the largest lower bound.
+\end{soln}
+\vspace{1in}
+
+
+
+\begin{prob}[Empty set and $\N^2$]
+Analyze and discuss properties of the emptyset and $\N^2$.
+\end{prob}
+\begin{soln}
+	\begin{itemize}
+		\item The empty set $\emptyset$ corresponds to infinity, this is because it vacuously satisfies that $X< \emptyset$ for all positive real numbers $X$. And is a right-complete and left-open set  for the same reason.
+		\item On the other hand, $\N^2$ corresponds to zero. In order to prove this assertion, we have to prove that $\N^2$ satisfies the properties of the identity element for the monoid: $(\R^+\cup\{0\},+)$. $\N^2$ is right complete since any pair greater than another is of course an ordered pair in $\N^2$. Similarly, for any pair $(p,q)$ there exists $(1,q+1)$ which is smaller since: $(q+1)p > q$, which means $\N^2$ is left-open. Finally, for any real positive number $X$:
+			$$\N^2 + X = \{z > x+y;\  y\in \N^2 , x\in X\} = X$$
+			To show this, take any $(p,q)\in X$ we will find $(x_1,x_2)\in X$ and $(1,n)\in \N^2$ such that:
+			$$(p,q) > (x_1,x_2)+ (1,n)$$
+			Since $X$ is left-open, take $(x_1, x_2)$ to be such that $(p,q)>(x_1,x2)$, equivalently: $px_2> qx_1$, the inequality is strict, then there is $m\in \N$ such that:
+			$$px_2 = qx_1 + m$$
+			Equivalently, multiplying $n$ on both sides:
+			$$px_2n = qx_1n + mn$$
+Now take $n\in \N$ such that $nm>qx_2$ this implies that:
+$$ px_2n > qx_1n + qx_2$$
+			Writing this as ordered pairs means $(p,q) > (x_1,x_2)+(1,n)$. Therefore $X\subset X+\N^2$. The other inclusion is much simpler since right completeness implies that for all $(x_1,x_2)\in X$ and for all $(p,q)\in N^2$ we have:
+			$$(x_1,x_2)<(x_1,x_2) + (p,q)$$
+			Then $(x_1,x_2) + (p,q) \in X$ implying that $X+\N^2 \subset X$.
+	\end{itemize}
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[Negative Reals]
+Dream up a nice way to incorporate the negative real numbers into this setting. [Hint: Use an algebraic approach.]
+\end{prob}
+\begin{soln}
+	To get the reals from the positive reals, first add $\N^2$ which according to the above acts as an additive identity. This gives us the nonnegative reals, let's call them $\R_0$. Take the set $\R_0\times \R_0$ of ordered pairs of nonnegative reals and for $(x,y), (z,w) \in \R_0\times \R_0$ define the operations:
+	\begin{itemize}
+		\item $(x,y) + (z,w) = (x+z,y+w)$
+		\item $(x,y)*(z,w) = (xz+yw, xw+yz)$
+	\end{itemize}
+	And the equivalence relationship $(x,y) \sim (x', y') \iff (x',y')=(x,y)+(z,z)$ for some  $z\in \R_0$.
+	
+	Define the reals to be $\R = (\R_0\times \R_0)/\sim $. We denote the equivalence class of $(\N^2, \N^2)$ as 0 for brevity and clarity. 
+	\begin{itemize}
+		\item Addition is well-defined since, if we take two pairs from the equivalence class of $(x+x', y+y')$ that is:
+			$$(a,b), (a',b') \in [(x+x', y+y')]$$
+			Then $(a,b) = (x+x', y+y')+(z,z) \text{ and } (a',b') = (x+x', y+y')+(z',z') $ for some $z,z'\in \R_0$. This implies that:
+			$$(a,b) \sim  (x+x', y+y')+(z,z)+(z',z')$$
+			$$(a',b') \sim  (x+x', y+y')+(z',z')+(z,z)$$
+		Therefore:	
+			$$(a,b) \sim  (x+x', y+y')+(z+z',z+z') \sim (a', b')$$
+		\item Similarly for the product:
+$$(x+s,y+s)*(z+s',w+s') = (xz+yw +xs'+sz+ss'+ys'+sw+ss', xw+yz+ys'+sz+ss'+xs'+sw+ss')$$
+Cancelling similar terms gives:
+			$$(x+s,y+s)*(z+s',w+s') \sim (xz+yw, xw+yz)$$
+	\end{itemize}
+	Assuming that the positive reals with multiplication are an abelian group $(\R^+)$ and that addition and multiplication for the positive reals satisfy the distributive property. (I will not prove this since it would take a looong time), all that we need to show in order to prove $(\R, +,\cdot)$ is a field is that $(\R,+)$ is an abelian group: we have already established the nonnegative reals a commutative monoid, we just need to check for the additive inverse. Thus: $$(x,y)+(y,x)= (x+y, y+x) \in 0$$
+	 It is also an ordered field with the additional property that:
+	$$(x,\N^2)<(y,\N^2) \implies (\N^2,y)< (\N^2,x)$$
+	Finally, a well known theorem says that any ordered field with the greatest lower bound property is isomorphic to the real numbers.
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[Prelim Problem]
+Consider $f(x) = \frac{\ln x}{x}$ which is defined for all positive real numbers. Find, with proof, the Taylor series of $f$ centered at $x=1$. Also find, with proof, the set of all real $x$ for which the Taylor series converges, and (if you are familiar with uniform convergence) the subset of reals for which the series converges uniformly.
+\end{prob}
+\begin{soln}
+	In order to find the Taylor series for $ f(x) = \ln x/x$ first observe that:
+	$$\frac 12\frac d{dx}(\ln x)^2 = f(x)$$ 
+	And the Taylor series of $\ln x$ is much easier to compute since:
+	$$\frac{f^{(n)}}{n!} = \frac{(-1)^{n+1}(n-1)!}{n!} = \frac{(-1)^{n+1}}{n}$$
+	The series for $\ln x$ around $x=1$ is then:
+	$$\ln(x) = \sum_{n=1}^\infty \frac{(-1)^{n+1}}{n}(x-1)^n $$
+	Squaring and Differentiating both side of the above equation: 
+	$$\frac {\ln x}{x} = \left[\sum_{n=1}^\infty \frac{(-1)^{n+1}}{n}(x-1)^n\right]\left[ \sum_{n=1}^\infty (-1)^{n+1} (x-1)^{n-1}\right]$$
+	Using the formula for the product of Taylor series, the  coefficients of the $(x-1)^n$ term is:
+	$$\sum_{k=1}^n \frac{(-1)^{k+1}}{k}(-1)^{n-k} =\sum_{k=1}^n \frac{(-1)^{n+1}}{k}$$ 
+
+	$$\frac{\ln x}x = \sum_{n=1}^\infty (-1)^{n+1}\left[ \sum_{k=1}^n \frac 1k\right] (x-1)^n$$
+	According to the ratio test the series converges in the interval:
+	$$\lim_{n\to \infty} \frac{1+\ldots + \frac 1{n+1}}{1+\ldots + \frac 1n}|x-1| = \lim_{n\to \infty} \left( 1+ \frac n{n+1} \right) |x-1| = |x-1| <1 $$
+	That is: $0<x<2$. This interval is open on both sides since $f$ is unbounded on zero.  And on $x=2$ has the sum of alternating harmonic series terms as coefficient on $x=2$. These numbers for a divergent sequence: If we call $H_k=\sum_{j=1}^k 1/j$ then $\sum_{k=1}^n (-1)^k H_k$ diverges.
+
+	As for all power series with open interval of convergence (in this case that radius of convergence is $R=1$), we have uniform convergence for all intervals of the form: $]\epsilon, 2-\epsilon[$ for all small $1\geq \epsilon>0$
+
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[Sequence with limit $\sqrt{2}$]
+Consider the sequence of rational numbers defined recursively by the following formula: $$(x,y) \mapsto (x^2 + 2y^2, 2xy)$$ and starting at the point $(x,y) = (2,1)$. Compute the first 8 terms of this sequence as fractions, and evaluate their squares as decimals. Show that the limit of the resulting sequence is $\sqrt{2}$.
+\end{prob}
+\begin{soln}
+The first 8 terms are:
+	\begin{center}
+	\begin{tabular}{|r|r|}
+		\hline
+		$n$ & $a_n$ \\
+		\hline
+1& 2.00000000000000\\
+		\hline
+2& 1.50000000000000\\
+		\hline
+3& 1.41666666666667\\
+		\hline
+4& 1.41421568627451\\
+		\hline
+5& 1.41421356237469\\
+		\hline
+6& 1.41421356237310\\
+		\hline
+7& 1.41421356237310\\
+		\hline
+8& 1.41421356237310\\
+\hline
+	\end{tabular}
+	\end{center}
+
+	To show that the sequence of fractions obtained recursively converges to $\sqrt 2$, first we write it as:
+	$$\frac{x^2 + 2y^2}{2xy} = \frac x{2y} + \frac yx $$
+	If we let $a_n = x/y$ for each term in the sequence, we get:
+	$$a_{n+1} = \frac{a_n}{2} + \frac 1{a_n}$$
+	Observe that $a_n > \sqrt 2$ for all $n>0$ since starting with $a_1=2$ and assuming that $a_n^2>2$ implies:
+	$$a_{n+1}^2-2 = \left( \frac{a_n}2 + \frac 1{a_n}\right)^2 - 2 = \frac{a_n^2}4 - 1 + \frac 1{a_n^2} = \frac{a_n^4 - 4a_n^2 +4}{4a_n^2} = \frac{(a_n^2-2)^2}{4a_n^2} > 0$$
+	Also note that $a_n $ defines a decreasing sequence, that is $a_{n+1} < a_n$ for all $n\geq 1$: 
+	$$a_n - a_{n+1} = a_n-\left(\frac{a_n}{2} + \frac 1{a_n}\right)=\frac{a_n}{2} - \frac 1{a_n} = \frac{a_n^2 - 2}{2a_n}>0 $$
+	This means that the sequence $\{a_n\}$ is decreasing and bounded. Thus, converges to its g.l.b.: $\inf_{n\in \N\}}\{a_n\} = a$. If this was not the case, there would be an $\epsilon>0$ such that $|a_n - a| \geq \epsilon$ for all $n\in \N$ contradicting the assumption that $a$ is the greatest lower bound.
+	
+	To finish the proof, note that the recursion step is given by the continuous function $f(x) = x/2 + 1/x$ on $x>0$; and that this function has only fixed points. That is, the equation $x = f(x)$ has only two solutions: $\pm \sqrt 2$. Finally, we show that $a$ ( the limit of $a_n$) has to be a fixed point of $f(x)$:
+	$$0 = \lim_{n\to \infty}(a_{n+1} - a_n) = \lim_{n\to \infty}(f(a_n) - a_n) =f(a) - a $$
+	Since there are only two fixed points of $f(x)$ and $a$ is positive, $a$ has to be $\sqrt 2$.
+
+\end{soln}
+\vspace{1in}
+
+
+\end{document}

@@ -1,0 +1,223 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,color,amssymb,amsthm,mathrsfs,verbatim,tikz,graphicx}
+\usepackage[margin=2.5cm]{geometry}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{fact}{Fact}
+\newtheorem{example}{Example}
+\newtheorem*{ex}{Exercise}
+\newtheorem*{soln}{Solution}
+\newtheorem*{prob}{Problem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{theorem}
+\newtheorem{thm}{Theorem}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\epsilon}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Proj}{\mathbb{P}}
+\newcommand{\HP}{\mathbb{H}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Pic}{\mbox{Pic}}
+\newcommand{\Div}{\mbox{Div}}
+\newcommand{\T}{\mathcal{T}}
+
+\begin{document}
+
+\title{Advanced Calculus HW 2 - Due September 15, 4pm}
+\author{Your Name}
+\maketitle
+
+
+
+\begin{prob}[1]
+Consider the sequence $\mathbb{X} = \{x_n \ | \ n \in \N\}$ recursively defined by $$x_{n+1} = 1 + \frac{1}{x_n}$$ and starting with $x_1 = 1$.
+\begin{enumerate}
+    \item Compute the first 10 terms of this sequence.
+    \item Formulate and prove a conjecture about the behavior of this sequence $\mathbb{X}$.
+    \item Find, with proof, an explicit formula for $x_n$ for each $n \in \N$.
+\end{enumerate}
+\end{prob}
+\begin{soln}
+    \begin{enumerate}
+        \item 1, 2/1, 3/2, 5/3, 8/5, 13/8, 21/13, 35/21, 56/35.
+        \item Using part 3), first note that $-1<\frac{\sqrt 5 - 1}{2}<1$ and so converges to zero. This means that the only term we need to consider is the  one greater that 1. Therefore as $n\to \infty$, $x_n \to \frac{1+\sqrt 5}{2}$.
+        \item Define the Fibonaci numbers as $f_0 = 1, f_1=1$ and $f_{n+1}= f_n + f_{n-1}$, then we get the identity:
+            $$x_n = \frac{f_{n+1}}{f_n} = \frac{f_n+f_{n-1}}{f_n} = 1+ \frac{f_{n-1}}{f_n} = 1+ \frac 1{x_{n-1}}$$
+            We can find the general Fibonaci number by assuming it has the form $x_n = ca^n + db^n$ and solving the resulting equations: $x^2-x-1=0$, which has solutions:
+            $$x = \frac{1\pm \sqrt{5}}{2}$$
+            We get:
+             $$f_n = \frac{(1+\sqrt 5)^n - (1-\sqrt 5)^n}{2^n\sqrt 5}$$
+             The general term of the sequence is then:
+             $$x_n = \frac 12\frac{(1+\sqrt 5)^{n+1} - (1-\sqrt 5)^{n+1}}{(1+\sqrt 5)^n - (1-\sqrt 5)^n}$$
+    \end{enumerate}
+
+
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[2]
+Determine, with proof, the following limit $A$ or prove that it does not exist.
+\begin{equation}\label{limit}
+A = \lim_{n \to \infty} e^{-n} \left( 1 + \frac{1}{n} \right)^{n^2}
+\end{equation}
+\end{prob}
+\begin{soln}
+Rewrite the function as:
+    $$\lim_{n \to \infty} e^{-n} \left( 1 + \frac{1}{n} \right)^{n^2} =\lim_{n \to \infty} \exp\left[\ln\left(e^{-n} \left( 1 + \frac{1}{n} \right)^{n^2}\right)\right]$$
+Use the properties of the logarithms:
+    $$=\lim_{n \to \infty} \exp\left[-n + \ln\left( 1 + \frac 1n\right)n^2\right]$$
+Interchange the limit and the exponential using that $\exp$ is a continuous function:
+    $$=\exp\left(\lim_{n \to \infty} \left[-n + \ln\left( 1 + \frac 1n\right)n^2\right]\right)$$
+    We will deal with the limit first, that is:
+    $$\lim_{n \to \infty} \left[-n + \ln\left( 1 + \frac 1n\right)n^2\right] = \lim_{n\to \infty}\left[ \frac{\ln\left(1+\frac 1n\right)- \frac 1n}{1/n^2}\right]$$
+    The last limit has the indeterminate form 0/0 so we can use L'Hospital's rule (differentiate numerator and denominator):
+    $$= \lim_{n\to \infty}\left[ \frac{\ln\left(1+\frac 1n\right)- \frac 1n}{1/n^2}\right]=\lim_{n\to \infty}\left[ \frac{\frac 1{1+1/n}\left(\frac{-1}{\phantom{-1}n^2}\right)- \frac{-1}{\phantom{-1}n^2}}{-2/n^3}\right] $$
+    This is equal to the easier limit:
+    $$=\lim_{n\to \infty} \left[ \frac{\frac n{1+n} -1 }{2/n}\right] = \lim_{n\to \infty} \left[ \frac {-n}{2(1+n)} \right]= -1/2$$
+    
+    Finally, we plug this number back into the exp function to get $e^{-1/2}$.
+
+\end{soln}
+\vspace{1in}
+
+
+
+\begin{prob}[3]
+A sequence $\mathbb{J} = \{ J_n = [a_n,b_n] \ | \ a_n, b_n \in \R, a_n < b_n, n \in \N\}$ is called \emph{nested} if and only if $J_{n+1} \subset J_n$ for each $n \in \N$.
+
+Prove that, if $\mathbb{J}$ is a nested sequence of closed intervals then we have $$\bigcap_{n \in \N} J_n = [a,b]$$ for some real numbers $a$ and $b$ such that $b-a = \lim_{n \to \infty} (b_n - a_n)$.
+\end{prob}
+\begin{soln}
+    Note that the sequences $\{a_n\}$ and $\{b_n\}$ are monotone sequences (increasing and decreasing respectively). This is because the intervals are nested, that is:
+    $$a_n \leq a_{n+1} \leq b_{n+1}\leq b_n $$
+    They are also bounded, since $a_1\leq b_n$ for all $n$ and similarly for $a_n \leq b_1$ for all $n$. 
+
+    This means that both sequences are convergent say $a_n \to b$ and $b_n \to b$ when $n\to \infty$. And that $a\leq b$ (since all intervals are nonempty). Therefore:
+    $$\lim_{n\to \infty} (b_n -a_n) = \lim_{n\to \infty}b_n - \lim_{n\to \infty}a_n = b-a$$ 
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[4: Pugh \#28 p. 49]
+A \emph{convex combination} of $w_1, \ldots, w_k \in \R^m$ is a vector sum $$w = s_1 w_1 + s_2 w_2 + \ldots + s_k w_k$$ such that $s_1 + s_2 + \ldots + s_k = 1$ and $0 \leq s_1, s_2, \ldots, s_k \leq 1$.
+\begin{enumerate}
+    \item Prove that if a set $E \subset \R^m$ is convex then it contains the convex combination of any finite collection of points of $E$.\\
+        We prove by induction over $k$: The starting case is very easy: if $k=1$ then $s_1 =1$ and since $w_1\in E$ then $s_1 w_1 $ is also in $E$.
+        The induction hypothesis is: Assume that for all convex combinations of $k$ elements:
+        $$s_1w_1+\ldots + s_kw_k \in E$$
+        Need to show that this implies the case $k+1$: 
+        
+        Take any convex combination of length $k+1$:
+        $$s_1w_1+\ldots + s_kw_k+ s_{k+1}w_{k+1} $$
+        Rewrite it as:
+        $$(s_1+\ldots + s_k)\left[ \frac{s_1}{s_1+\ldots + s_k} w_1 + \ldots + \frac{s_k}{s_1+\ldots + s_k}w_k\right]  + s_{k+1}w_{k+1}$$
+        The sum:
+        \begin{equation}\label{cvx} \frac{s_1}{s_1+\ldots + s_k} w_1 + \ldots + \frac{s_k}{s_1+\ldots + s_k}w_k
+        \end{equation}
+        Is a convex combination of length $k$, then by the induction hypothesis it is in $E$. Finally, this implies that (\ref{cvx}) is in $E$ because we assumed it is convex and $(s_1+\ldots + s_k) + s_{k+1}=1$. 
+
+    \item Why is the converse obvious?\\
+	    It is trivial because convexity is just the case where $k=2$.
+\end{enumerate}
+\end{prob}
+\begin{soln}
+
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[5: Pugh \#29 p. 49]
+\begin{enumerate}
+    \item Prove that the ellipsoid $$E = \left\{ (x,y,z) \in \R^3 \ | \ \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} \leq 1 \right\}$$ is convex. [Hint: $E$ is the unit ball for a different dot product. What is it? Does the Cauchy-Schwarz inequality not apply to all dot products?]
+    \item Prove that all boxes in $\R^m$ are convex.
+\end{enumerate}
+\end{prob}
+\begin{soln}
+
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[6: Pugh \#30 p. 49]
+A function $f: (a,b) \to \R$ is convex if, for all $x,y \in (a,b)$ and all $s,t \in [0,1]$ with $s+t=1$ we have $$f(sx + ty) \leq sf(x) + tf(y).$$
+\begin{enumerate}
+    \item Prove that $f$ is convex if and only if the set $S$ of points above the graph of $f$ is convex in $\R^2$. The set $S$ is $\{ (x,y) \ | \ f(x) \leq y\}$.
+    \item $(*)$ Prove that every convex function is continuous.
+    \item Suppose $f$ is convex and $a < x < u < b$. The slope $\sigma$ of the line through $(x,f(x))$ and $(u,f(u))$ depends on $x$ and $u$, say $\sigma = \sigma(x,u)$. Prove that $\sigma$ increases when $x$ increases and $\sigma$ increases when $u$ increases.
+    \item Suppose $f$ is second-order differentiable, that is, $f$ is differentiable and its derivative $f'$ is also differentiable. Prove that $f$ is convex if and only if $f''(x) \geq 0$ for all $x \in (a,b)$.
+    \item Forulate a definition of convexity for a function $f: M \to \R$ where $M \subset \R^m$ is a convex set. [Hint: Start with $m=2$.]
+\end{enumerate}
+\end{prob}
+\begin{soln}
+    \textbf{Solution to 1.} First we assume that $f$ is a convex function. Observe that if $x,x' \in (a,b)$ then the points $(x,f(x)) , (x', f(x')$ are in $S$ since $f(x)=y$ and $f(x')=y'$. Then, for all $t\in [0,1]$ the point:
+    \begin{equation}\label{comb} t\begin{pmatrix}  x \\ f(x) \end{pmatrix} + (1-t)\begin{pmatrix}  x' \\ f(x') \end{pmatrix} = \begin{pmatrix}  tx + (1-t)x' \\ tf(x) + (1-t)f(x') \end{pmatrix}\end{equation}
+        is in $S$ since $f(tx + (1-t)x') \leq tf(x) + (1-t) f(x')$ by the convexity of $f$.
+
+        Next, we assume that the set $S$ is convex. This means that for any $t\in [0,1]$ and $(x,f(x)), (x',f(x')) \in S$, we have that the convex combination (\ref{comb}) is also in $S$. Therefore, we have that:
+        $$f(tx + (1-t)x') \leq tf(x) + (1-t) f(x')$$
+
+    \textbf{Solution to 2.} For simplicity we assume first that $f$ is convex and defined on all $\R$. Take any $x\in \R$  and  any $1>\epsilon >0$ define:
+    $$M = \max\{|f(x+1) - f(x)|, \ |f(x) - f(x+\E- 1)|,\ 1\}$$
+    Take $0\leq \alpha <\delta = \E/M$. If $y= x+\alpha$ then write  $y$ as the convex combination:
+    $$y = (1-\alpha)x + \alpha(x+1)$$ which implies that:
+    $$f(y) - f(x) \leq \alpha(f(x+1) - f(x))$$
+    Similarly for $x= y-\alpha$,  we can write: $x= (1-\alpha)y + \alpha(y-1)$ thus:
+    $$f(x) - f(y) \leq \alpha(f(y-1) - f(y) )$$
+    This implies that:
+    $$|f(y) -f(x) | \leq \alpha \max\{|f(x+1) - f(x)|, \ |f(x) - f(x+\E- 1)|\} < \delta \, M = \E$$
+    The argument is perfectly symmetrical for $x$ and $y$, so it works for $|y-x|<\delta$. The case in which $f$ is defined only on the interval $(a,b)$ is very similar; we just need to replace the ``ones'' in the definition of $M$ by scaled down values $s,t$ such that $x+s , x+\E -t \in (a,b)$.
+
+    \textbf{Solution to 3.} First we prove it for an increase in $x$. Note that for any $\alpha \in (0, 1]$ we can write a convex combination between $x$ and $u$ as: $\alpha x + (1-\alpha)u$ then:
+    $$\sigma(\alpha x + (1-\alpha)u, u) = \frac{f(\alpha x + (1-\alpha)u) - f(u)}{\alpha(x-u)}\geq \frac{\alpha(f(x) - f(u))}{\alpha(x-u)} = \sigma(x,u)$$
+    The last inequality is since $x<u$ and $f(\alpha x + (1-\alpha)u) \leq \alpha f(x) + (1-\alpha)f(u)$.
+    If there is an increase in $u$ namely, $u+\ell>u$, then there is an $\alpha_u$ such that:
+    $$ u = (1-\alpha_u) x+ \alpha_u(u+\ell)$$
+    Then
+    $$\sigma(x,u) = \frac{f(x) - f((1-\alpha_u) x+ \alpha_u(u+\ell))}{x-((1-\alpha_u) x+ \alpha_u(u+\ell))}\leq \frac{\alpha_u(f(x) - f(u+\ell))}{\alpha_u(x-u-\ell)} $$
+    The last inequality is the result of $x-u-\ell<0$ and $f((1-\alpha_u) x+ \alpha_u(u+\ell))\leq \alpha_u f(x) + (1-\alpha_u)f(u+\ell)$.
+    
+    The last case is when the increase in $x$ results in a value greater that $u$. But this is just the previous case since $\sigma(x,u+\ell) = \sigma(u+\ell,x)$.
+
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[7: Pugh \#*31 p. 49]
+Suppose a function $f: [a,b] \to \R$ is monotone nondecreasing. That is, $x_1 \leq x_2$ implies $f(x_1) \leq f(x_2)$.
+\begin{enumerate}
+    \item Prove that $f$ is continuous except at a countable set of points. [Hint: Show that at each $x \in (a,b)$, $f$ has a right limit $f(x+)$ and a left limit $f(x-)$ which are limits of $f(x+h)$ as $h \to 0$ through positive and negative values respectively. The jump of $f$ at $x$ is $f(x+) - f(x-).$ Show that $f$ is continuous at $x$ if and only if it has zero jump at $x$. At how many points can $f$ have a jump $\geq 1$? At how many can it be between $1/2$ and $1$? Between $1/3$ and $1/2$?]
+    \item Is the same assertion true for a monotone function defined on all of $\R$?
+\end{enumerate}
+\end{prob}
+\begin{soln}
+        An uncountable sum of nonzero numbers is always infinite so the maximal cardinality of discontinuouties an increasing function can have is countable.
+
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[8: Pugh \#39 p. 51]
+A real number is \emph{algebraic} if it is a root of a nonconstant polynomial with integer coefficients.
+\begin{enumerate}
+    \item Prove that the set $A$ of algebraic numbers is denumerable. [Hint: Each polynomial has how many roots? How many linear polynomials are there? How many quadratics? $\ldots$]
+    \item Repeat the exercise for roots of polynomials whose coefficients belong to some fixed, arbitrary denumerable set $S \subset \R$.
+    \item $(*)$ Repeat the exercise for roots of trigonometric polynomials with integer coefficients.
+    \item Real numbers that are not algebraic are called \emph{transcendental}. Trying to find transcendental numbers is said to be like looking for hay in a haystack. Why?
+\end{enumerate}
+\end{prob}
+\begin{soln}
+
+\end{soln}
+\vspace{1in}
+
+\end{document}

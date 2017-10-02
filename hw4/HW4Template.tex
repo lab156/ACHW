@@ -1,0 +1,239 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,color,amssymb,amsthm,mathrsfs,verbatim,tikz,graphicx}
+\usepackage[margin=2.5cm]{geometry}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{fact}{Fact}
+\newtheorem{example}{Example}
+\newtheorem*{ex}{Exercise}
+\newtheorem*{soln}{Solution}
+\newtheorem*{prob}{Problem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{theorem}
+\newtheorem{thm}{Theorem}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\emptyset}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Proj}{\mathbb{P}}
+\newcommand{\HP}{\mathbb{H}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Pic}{\mbox{Pic}}
+\newcommand{\Div}{\mbox{Div}}
+\newcommand{\T}{\mathcal{T}}
+
+\begin{document}
+
+\title{Advanced Calculus HW 4 - Due September 29, 4pm}
+\author{Luis Berlioz}
+\maketitle
+
+
+
+\begin{prob}[1]
+Let $X = \{0, 1\}$ be a set with two elements.   As discussed in class, there are four distinct topologies on $X$, say $\tau_1, \tau_2, \tau_3$ and $\tau_4$.   Determine, with proof,  all continuous maps from $(X, \tau_i)$ to $(X, \tau_j)$, for all $1\le i \le 4$ and all $1 \le j \le 4$.
+\end{prob}
+\begin{soln}
+We label the four possible topologies like so:
+    \begin{align*}
+        \tau_1 &= \{ \E, X, \{0 \},\{ 1 \} \} \text{ i.e. the discrete topology} \\ 
+        \tau_2 &= \{ \E, X, \{0 \} \} \\ 
+        \tau_3 &= \{ \E, X, \{1 \} \} \\ 
+        \tau_4 &= \{ \E, X  \} \text{ i.e. the indiscrete topology} \\ 
+    \end{align*}
+    There are also four possible maps $\{0,1  \}\to \{0,1\}$. Let us label them as follows:
+    \begin{align*}
+        f_1 &= \{ (0,0), (1,0)  \}   \text{ i.e. the zero  function} \\ 
+        f_2 &= \{ (0,1), (1,1)  \}   \text{ i.e. constant 1 function} \\ 
+        f_3 &= \{ (0,0), (1,1)  \}   \text{ i.e. the identity function} \\ 
+        f_4 &= \{ (0,1), (1,0)  \}
+    \end{align*}
+    Observe that all functions are continuous when the domain has the discrete topology $\tau_1$. This is because for any $A\subset X$, $f^{-1}(A)$ is open in the discrete topology. Analogously, if the range of the map is provided with the indiscrete topology, all functions are continuous. This is because $f^{-1}(X)=X$ and $f^{-1}(\E)= \E$ for all functions and $X,\ \E$ are the only open sets of the indiscrete topology. Next we observe that the constant functions are always continuous since the inverse image of any set will be either $X$ of $\E$ depending on whether contains the only value attained by the function. 
+
+    For the identity function $f_3$ we have continuouity whenever the domain topology is finer that the one on the range. To list all the cases, consider the table below, in which we label T  if the map from the row to column is continuous and F otherwise.
+    \begin{center}
+\begin{tabular}{|l|c|c|c|}
+    \hline
+$f_3$    & $\tau_1$ & $\tau_2$ & $\tau_3$\\
+         \hline
+$\tau_2$ &   F      &   T      &   F     \\
+         \hline
+$\tau_3$ &   F      &   F      &   T     \\
+         \hline
+$\tau_4$ &   F      &   F      &   F     \\
+         \hline
+\end{tabular}
+    \end{center}
+
+ For $f_4$, we have:
+    \begin{center}
+\begin{tabular}{|l|c|c|c|}
+    \hline
+$f_4$    & $\tau_1$ & $\tau_2$ & $\tau_3$\\
+         \hline
+$\tau_2$ &   F      &   F      &   T     \\
+         \hline
+$\tau_3$ &   F      &   T      &   F     \\
+         \hline
+$\tau_4$ &   F      &   F      &   F     \\
+         \hline
+\end{tabular}
+    \end{center}
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[2]
+Show that the boundary of a unit square in the plane is homeomorphic to the unit circle, but that these spaces are not isometric using the ambient metrics.  Do there exist metrics on these two spaces that render them isometric?  Explain.
+\end{prob}
+\begin{soln}
+    Topologically, the circle is $\R/\Z$ that is, $\R/\sim$ where $\sim$ is the equivalence relation given by $x\sim y \iff x-y \in \Z$. The homeomorphism is given by $h:\R/\Z \to S$ where $S$ is the unit square on the first quadrant and one corner in the origin:
+    $$h(x) = \begin{cases}
+        (4x,0) & 0\leq x\leq 1/4 \\
+        (1, 4x-1) & 1/4\leq x \leq 1/2\\
+        (-4x+3, 1) & 1/2 \leq x\leq 3/4\\
+        (0,-4x+4) & 3/4 \leq x\leq 1\sim 0 
+    \end{cases}$$
+    Observe the $h$ is well defined since it is injective on the interval [0,1). as it is continuous (even on the corners), the inverse is obtained by inverting the line pieces in each side of the square, and the inverse is also continuous because its just the inverse of a piecewise afine function.
+
+    In the ambient space of $\R^2$, there is no isometry that take one set to the other since  for instance, they do not have the same length (the circle has perimeter $2\pi$ and the square $4$). Nevertheless, the spaces are isometric: Let $(S,d_S)$ and $(\R/\Z, d)$ with the metrics defined as:
+    $$d_S ((x,y),(x',y')) = \frac 12 (|x-x'| + |y-y'|)$$
+    $$d(t,t') = \begin{cases}
+        |t-t'| & \text{ if } |t-t'| \leq 1  \\
+        2- |t-t'| & \text { if } |t-t'| > 1
+    \end{cases}$$
+The first one $d_S$ is just 
+    Provided with these two metrics $h$ turns out to be an isometry between these two spaces. To prove this, take $t, t'\in \R/\Z$, and assume $t<t'$. If the interval $(t,t')$ does not contain any of the corners (1/4, 1/2/, 3/4, 1 or 0), then the distance between $t$ and $t'$ is:
+    $$|t-t'| = d(t,t') = d_S(h(t), h(t')) = \frac 14 |4t - 4t'| + 0$$
+    And, if the interval $(t,t')$ does contain a 
+\end{soln}
+\vspace{1in}
+
+
+
+\begin{prob}[3]
+Compute, with proof, the following limits, or show that the limit in question does not exist:
+\[ A = \lim_{n \rightarrow \infty} \left(1 + \sqrt{\frac{3}{n}}\right)^{\sqrt{3n}},\]
+\[ B = \lim_{n \rightarrow \infty} \left(\sqrt{n^2 + n + 1}  - \sqrt{n^2 - n + 1}\right),\]
+\[ C = \lim_{n \rightarrow \infty} \left(\sqrt[3]{n^3 + n^2 + n + 1}  - \sqrt[3]{n^3 - n^2 + n - 1}\right). \]
+\end{prob}
+\begin{soln}
+    Using the limit in the last week homework and the change of variable $k=\sqrt{3n}$:
+    \[ A = \lim_{n \rightarrow \infty} \left(1 + \sqrt{\frac{3}{n}}\right)^{\sqrt{3n}}= \lim_{n \rightarrow \infty} \left(1 + \frac3{\sqrt{3n}}\right)^{\sqrt{3n}}=\lim_{k \rightarrow \infty} \left(1 + \frac3{k}\right)^{k}= e^3\]
+    Rationalizing the square root:
+    \[ B = \lim_{n \rightarrow \infty} \left(\sqrt{n^2 + n + 1}  - \sqrt{n^2 - n + 1}\right)= \lim_{n \rightarrow \infty} \left(\frac {2n}{\sqrt{n^2 + n + 1}  + \sqrt{n^2 - n + 1}}\right)\]
+    Note that $$\sqrt{n^2 + n + 1}  + \sqrt{n^2 - n + 1}=n\left(\sqrt{\frac 1{n^2} + \frac 1n + 1}  + \sqrt{1 - \frac 1n + \frac 1{n^2}}\right) \approx 2n  $$
+    When $n\to \infty$, therefore $B$ tends to $2n/2n=1$ as $n\to \infty$.
+    Similarly as above, for $C$ we rationalize using difference of cubes, calling $G = \sqrt[3]{n^3 + n^2 + n + 1} $ and $H=\sqrt[3]{n^3 - n^2 + n + 1} $ observe that $G^3-H^3= 2n^2$, and for large  $n$, $H,G \approx n$, therefore:
+    \begin{align*} C &= \lim_{n \rightarrow \infty} \left(G  - H\right)\\ 
+        &=  \lim_{n \rightarrow \infty} \frac {2n^2}{G^2 +G\, H +H^2} = \frac 23
+    \end{align*}
+
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[4]
+Let $f(x)$ have Taylor series:  $ f(x) = a_0 + a_1 x + a_2x^2  + \dots, \hspace{7pt}\textrm{for real $a_i$, $i = 0, 1, 2, \dots$}$
+Determine the Taylor series for the functions: $\displaystyle{ g(x)   = f(x)(1 - x)^{-1}}$ and $\displaystyle{ h(x) = f(x) \ln\left((1 - x)^{-1}\right)}.$
+If $f$ has radius of convergence $R$, what can one say about the radii of convergence of the series $g$ and $h$?  Explain, with proof.
+\end{prob}
+\begin{soln}
+    Since the Taylor series for $1/(1-x)=1+x+x^2+\ldots$, we can use the product formula for series:
+    \begin{equation}\label{pr}
+\frac {f(x)}{1-x} = \sum_{n=0 }^\infty\left(\sum_{k=0 }^n a_k\right) x^n\end{equation}
+     The series expansion for $g$ is guaranteed to converge for  $|x|<\min\{1, R  \}$.   This is because if $|x|<\min\{1,R  \}$ then both the series for $f$ and $1/(1-x)$ converge. This is because of Cauchy's product theorem for series. Which can be used since all power series converge absolutely inside the interval of convergence due to the power/ratio test.  Moreover, by the continuity of  the convergence of the Taylor series, we get that (\ref{pr}) also converges and to the right  function. 
+     
+      The  inequality $|x|<\min\{1,R  \}$ is sharp, for example: take $f(x)=1$, then the series for $g$ still has the same radius of convergence as $1/(1-x)$, that is, 1.
+
+      Nevertheless, the radius of convergence of $g$ can be strictly greater than $|x|<\min\{1,R  \}$. As an example of this case, consider $f(x) = 1-x$ then:
+      $$g(x) = (1-x)\frac 1{1-x} = 1$$
+      And this series has infinite radius. 
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[5: Pugh \#1 p. 125]
+    An ant walks on the floor, ceiling and walls of a cubical room. What metric is natural for the ant's view of its world? What metric would a spider consider natural? If the ant wants to walk from a point $p$ to a point $q$, how could it determine the shortest path?
+\end{prob}
+\begin{soln}
+For the ant, a natural metric would be the Manhattan metric in $\R^3$:
+    $$d((x,y,z),(x',y',z')) = |x-x'| + |y-y'| + |z-z'|$$
+    This would mean that the ant would always move in directions that are parallel to one of the axis and perpendicular to the other two. This would be natural in the same cases as it is natural for drivers to uses while driving in Manhattan for example. 
+
+    On the other hand, the spyder would rather use the Euclidean norm because it can move on the inside of the cube.
+
+    For the ant, if it were trying to move from one face to an adjacent one, suppos WLOG, that they are the points on the unit square $0\leq x,y,z\leq 1$. If the ant is trying to move from the point $(x,0,z)$ to the point $(x',y,0)$. Then it would have to imagine the cube as an unrolled flat surface. If we unroll around the $x-$axis we get the distance it would only cross one edge of the cube:
+    $$d_2 = \sqrt{(x-x')^2 + (z+y)^2}$$
+    If we unroll around the $z$ and $y-$axis the ant would cross two edges of the cube and the distance function is given by:
+    $$d_3=\sqrt{(y+x')^2 +(z+x)^2}$$
+    
+    If the points are in opposite faces, there is four possibilities but the distance functions are just the addition of all the Euclidean distances after flattening out the cube.
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[6: Pugh \# p. 125]
+    Why is the sum metric on $\R^2$ called the Manhattan metric and the taxicab metric?
+\end{prob}
+\begin{soln}
+
+    The city of Manhattan has a very rectangular system of streets and avenues, this means that to get from one point to the other you cannot take a straight direction but take a rectangular path following the street pattern. 
+
+    This is exactly what the Manhattan metric measures the coordinate absolute value distance.
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[7: Pugh \#5 p. 125]
+    For $p,q\in S^1$, the unit circle in the plane, let
+    $$d_a(p,q) = \min\{|\angle(p) - \angle(q)|, 2\pi-|\angle(p) - \angle(q)|  \}$$
+    where $\angle(z) \in [0,2\pi)$ refers to the angle that $z$ makes with the positive $x-$axis.
+\end{prob}
+\begin{soln}
+    The function $d_a$ is never negative since both $p,q\in [0,2\pi)$ so either $ |\angle(p) - \angle(q)|\geq 0$ or $2\pi - |\angle(p) - \angle(q)|\geq 0$. Next, observe that $d_a(p,q)=0$ implies that $p=q$ or that $|p-q| = 2\pi$ which in a circle implies that they are the same point.
+
+    Also, $d_a$ is clearly symmetrical in its arguments since in both cases, the difference is evaluated inside an absolute value.
+
+    For the triangle inequality, WLOG, let us assume that $0 =  \angle(p)$ and call $t_1=0, t_2 = \angle(q)$ and for a third point $t_3 = \angle(r)$.
+    \begin{description}
+        \item[Case $t_2\leq \pi$]
+            This implies that $d_a(t_2,t_1) = t_2$. If $t_3\leq \pi$ then all the angle are in the interval $[0,\pi]$ and the result is true by the property of the absolute value:
+            $$|t_1-t_2| \leq |t_1-t_3| + |t_2-t_3|$$
+            If $t_3>\pi$ then:
+            $$d(t_2,t_3) + d(t_1,t_3) = t_3 - t_2 + 2\pi - t_3$$
+            $$= 2\pi - t_2\geq t_2 = d(t_2,t_1)$$
+
+        \item[Case $t_2>\pi$]
+            First we assume that $t_3>\pi$ so:
+            $$d(t_2,t_3) + d(t_1,t_3) = |t_3 - t_2| + 2\pi - t_3$$
+            $$\geq 2\pi - t_2 = d(t_2,t_1)$$
+            And finally, if $t_3\leq \pi$, 
+            $$d(t_2,t_3) + d(t_1,t_3) = t_2 - t_3 +  t_3$$
+            $$\geq 2\pi - t_2 = d(t_2,t_1)$$
+    \end{description}
+\end{soln}
+\vspace{1in}
+
+
+
+\begin{prob}[8]
+Give an example, with proof, of a sequence of real numbers, with two subsequences with different limits, $a$ and $b$ say, such that any convergent subsequence has limit $a$ or limit $b$.    Also give an example, with proof, of a sequence of real numbers, with two subsequences with different limits, $a$ and $b$ say, such that, if $c$ is real with $a < c< b$, then there is a  subsequence with limit $c$. 
+\end{prob}
+\begin{soln}
+    Consider the sequence $c_n = (-1)^n$. The subsequence $c_{2n } = 1$ converges to 1 (ince it is the constant function). And $c_{2n+1 } = -1$ is also constant and thus convergent. These are the only two possible limits that a subsequence can have since the range of the sequence is just $\{-1,1  \}$ is closed and so every convergent subsequence has to converges inside the set. 
+
+    For the second example, using the fact that the set of rationals is countable, take $s_n$ for $n\geq 0$ to be any bijection from $\N$ to the rationals between 0 and 1.  There is a subsequence of $\{s_n  \}$ converging to any real number $c$ between 0 and 1. It can be contructed in the following way: For each $k\in \N$ take $n_k$ to be the smallest natural number such that: 1) $n_k>n_{k-1 }$ and  2) $|s_{n_k }-c|<1/k$. Observe that this $n_k$ exists because otherwise the number of elements of $s_n$ in the open interval $|x-c|<1/k$ would be finite, contradicting the density of the rational numbers in the real line.
+\end{soln}
+\vspace{1in}
+
+
+\end{document}
