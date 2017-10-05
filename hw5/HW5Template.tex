@@ -1,0 +1,107 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumerate}
+\usepackage{amsmath,color,amssymb,amsthm,mathrsfs,verbatim,tikz,graphicx}
+\usepackage[margin=2.5cm]{geometry}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{fact}{Fact}
+\newtheorem{example}{Example}
+\newtheorem*{ex}{Exercise}
+\newtheorem*{soln}{Solution}
+\newtheorem*{prob}{Problem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{theorem}
+\newtheorem{thm}{Theorem}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\emptyset}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Proj}{\mathbb{P}}
+\newcommand{\HP}{\mathbb{H}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Pic}{\mbox{Pic}}
+\newcommand{\Div}{\mbox{Div}}
+\newcommand{\T}{\mathcal{T}}
+
+\begin{document}
+
+\title{Advanced Calculus HW 5 - Due October 9, 4pm}
+\author{Luis Berlioz}
+\maketitle
+
+
+
+
+\begin{prob}[1: Pugh \#18 p. 126]
+Is $\R$ homeomorphic to $\Q$? Explain.
+\end{prob}
+\begin{soln}
+    No. We know that $\R$ is connected (we showed it in class). On the other hand, $\Q$ is not, as an example consider the sets $\Q\cap (-\infty, \sqrt 2)$ and $\Q\cap(\sqrt 2, \infty)$, these two set are open in the relative topology of $\Q$, hence, it is not connected. A homeomorphism would preserve the property of either being connected or not. Therefore they cannot be homeomorphic.
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[2: Pugh \#20 p. 126]
+    What function (given by a formula) is a homeomorphism from (-1,1) to $\R$? is every open interval homeomorphic to (0,1)? Why or why not?
+\end{prob}
+\begin{soln}
+    For a homeomorphism between $(-1, 1)$ and $\R$, consider:  $f: (-1,1) \to \R$ given by $f(x) = \tan(\frac\pi2 x)$. This function is continuous on all its domain because it is differentiable. Also, $\lim_{x\to -1 }f(x) = -\infty$ and $\lim_{x\to 1 }f(x) = \infty$. Lastly, its inverse, namely $f^{-1 }(x) = \frac 2\pi \tan^{-1 }(x)$ is also differentiable and thus continuous. 
+
+    For any open interval $(a,b)$ the linear function:
+    $$f(x) = \frac{x-a}{b-a}$$  
+    Is a homeomorphism between the open intervals $(a,b)$ and $(0,1)$ because it is continuous and with continuous inverse:
+    $$f^{-1 }(x) = (b-a)x + a$$
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[3: Pugh \#22 p. 126]
+    If every closed and bounded subset of a metric space $M$ is compact, does it follow that $M$ is complete? (Proof or counterexample)
+\end{prob}
+\begin{soln}
+    This is true, to prove it consider a Cauchy sequence $\{x_n  \}$. As a subset of $M$ the closure of $\overline{\{x_n  \}}$ is closed and bounded (Cauchy sequences are always bounded). In a metric space, compact and sequentially compact are equivalent, so $\{x_n  \}$ has a converging subsequence converging to say, $x\in M$. And since it is Cauchy, this limit is unique. Hence, $M$ is complete.
+\end{soln}
+\vspace{1in}
+
+
+
+\begin{prob}[4: Pugh \#23 p. 126]
+    $(0,1)$ is an open subset of $\R$ but not of $\R^2$, when we thing of $\R$ as the $x-$axis in $\R^2$. Prove this.
+\end{prob}
+\begin{soln}
+    Let $B(x,\epsilon)\subset \R^{2 }$ be an open ball in the plane with center $0<x<1$ and radius $\epsilon >0$. Consider the point $p = (x,\epsilon/2)$. Note that $p\in B(x,\epsilon)$ but $p$ is not in $(0,1)$. If this set were open then there would exist an $\epsilon >0$ such that the ball $B(x,\epsilon)$ would be contained inside it; since this is not the case, we conclude that it is not open.
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[5: Pugh \#24 p. 126]
+    For which intervals $[a,b]$ in $\R$ is the intersection $[a,b]\cap \Q$ a clopen subset of the metric space $\Q$?
+\end{prob}
+\begin{soln}
+    The set $[a,b]\cap \Q$ is clopen whenever $a,b$ are irrationals. This is because if $a,b$ are irrational numbers, the sets:
+    $$(a,b)\cap \Q \text{ and } [a,b] \cap \Q$$
+    Are indistinguishable, and therefore clopen in the relative topology of $\Q$.
+\end{soln}
+\vspace{1in}
+\begin{prob}[6: Pugh \#24 p. 126]
+    If $S,T \subset M$, a metric space, and $S\subset T$, prove that 
+    \begin{enumerate}[(a)]
+        \item $\bar S \subset \bar T$.
+        \item $int(S) \subset int(T)$.
+    \end{enumerate}
+\end{prob}
+\begin{soln}
+    (a) If $x\in \bar S$, then all neighborhood $x\in O$ are NOT disjoint with $S$. Since $S\subset T$ we also get that $O\cap T \neq \E$. Hence, $x\in \bar T$.
+
+    (b) Analogously,  if $x\in int(S)$, then there exists a neighborhood $x\in O\subset S$. Since $S\subset T$ we also get that $O\subset T $. Hence, $x\in int( T)$.
+\end{soln}
+
+\end{document}
