@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,color,amssymb,amsthm,mathrsfs,verbatim,tikz,graphicx}
 \usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
 \usetikzlibrary{matrix,arrows,decorations.pathmorphing}
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}
@@ -24,6 +25,7 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\M}{\mathbb{M}}
 \newcommand{\C}{\mathbb{C}}
+\renewcommand{\S}{\mathbb{S}}
 \newcommand{\E}{\mathbb{\emptyset}}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\Proj}{\mathbb{P}}
@@ -32,6 +34,9 @@
 \newcommand{\Pic}{\mbox{Pic}}
 \newcommand{\Div}{\mbox{Div}}
 \newcommand{\T}{\mathcal{T}}
+\newcommand{\atan}{\operatorname{atan2}}
+\newcommand{\acos}{\operatorname{acos}}
+
 
 \begin{document}
 
@@ -73,10 +78,24 @@ Let $\mathbb{X}$ be the polar curve in $\mathbb{R}^2$, given in polar co-ordinat
     \includegraphics[width=0.5\textwidth]{figs/topol.pdf}
                 \caption{Graph of $y = \sin(\pi/x)$}
 \end{figure}
-        \item The maps $\theta \mapsto (1-\pi/\theta, \theta)$ and $x \mapsto (x,\sin(\pi/x)$ where $\theta\geq \pi$ and $0<x\leq 1$ are both homeomorphisms. Since the sets (we proved this in the last homework) $[\pi,\infty)$ and $(0,1]$ are homeomorphic, we conclude that $\X$ and $\Y$ are homeomorphic.
-\item Both $\X$ and $\Y$ are the image of connected spaces over continuous functions and therefore connected. In general, the closure of a connected set is connected because points in the closure cannot be disjoint from the original set. 
+        \item First we show that the maps $f(\theta) = (1-\pi/\theta, \theta)$ and $g(x) = (x,\sin(\pi/x)$ where $\theta\geq \pi$ and $0<x\leq 1$ are both homeomorphisms by proving they are continuous, injective and their inverse is continuous. 
+            
+            For both cases, $f$ and $g$ are continuous because each of its component functions are continuous (on its respective domains). Also, both functions are injective because  the second component of $f(\theta) $ and the first one of $g(x)$ are just the identity. The inverse of $f$ and $g$ are just the second and first projection respectively, therefore they are both continuous. 
 
-    First we show that $\Y$ is not path connected. Assuming it is, take a continuous function $\gamma\ :\ [0,1]\to \Y$ such that $\gamma(0) = (0,0)$ and $\gamma(1) = (1, 0)$
+            Since the sets (we proved this in the last homework) $[\pi,\infty)$ and $(0,1]$ are homeomorphic, namely $h(\theta)=x$, we conclude that $\X$ and $\Y$ are homeomorphic with the homeomorphism $p\mapsto (g\circ h\circ f^{-1 })(p)$ for all $p\in \X$.
+
+\item Both $\X$ and $\Y$ are the image of connected spaces over continuous functions and therefore connected. In general, the closure of a connected set is connected because points in the closure cannot be separated from the original. So it is not possible to find a neighborhood of a point in $\bar\X \backslash \X$ of $\bar\Y \backslash \Y$ that is disjoint from $\X$ and $\Y$ respectively. This implies that $\bar\X$ and $\bar\Y$ are connected.
+
+    Next we show that $\Y$ is not path connected. Assuming it is, take a continuous function $\gamma\ :\ [0,1]\to \Y$ such that $\gamma(0) = (0,0)$ and $\gamma(1) = (1, 0)$. Let us assume that if $\gamma_1(t)$ is the first component of the $\gamma(t)$ vector, then $\gamma_1(t)>0$ whenever $t>0$. 
+        
+        Note that $\gamma$ can always be taken this way since it is continous and this implies that the set $\gamma^{-1 }(\{0 \}\times [-1, 1])$ is closed. It is also bounded since the whole set $\X$ is bounded and therefore it is compact. A compact set in $\R$ always has a largest element which we call $\ell$. Then $\gamma:\ [\ell, 1]$ has the desired property and we can reparametrize.
+
+        The contradiction arises when we take a sequences of values $\{t_n  \}$ converging to zero, then the continuity of $\gamma$ implies that $\gamma(t_n)$ has to converge. Nevertheless, by the intermediate value property applied to the first component $\gamma_1$ we can find a sequence  such that:
+        $$\gamma_1(\tau_n)=\frac{\pi}{\frac \pi2 + \pi n} \to 0$$
+        For $n\geq 1$ because $\gamma_1$ takes the interval $(0,1)$ to $(0,1)$ by construction. But this means that:
+        $$\gamma(\tau_n)=\left(\frac{\pi}{\frac \pi2 + \pi n} , \sin(\frac \pi2 + \pi n) \right) = \left(\frac{\pi}{\frac \pi2 + \pi n} , (-1)^n \right)$$
+
+        Which does not converge. 
 
 \item Prove that the spaces $\overline{\mathbb{X}}$ and $\overline{\mathbb{Y}}$ are not homeomorphic.
 \end{itemize}
@@ -89,6 +108,26 @@ Let $\mathbb{X}$ be the polar curve in $\mathbb{R}^2$, given in polar co-ordinat
 The unit three-sphere $\mathbb{S}^3$, center the origin is the subset of $\mathbb{R}^4$, with Cartesian co-ordinates $(t, x, y, z) \in \mathbb{R}^4$ given by the equation $t^2 + x^2 + y^2 + z^2 = 1$.  \\Prove that $\mathbb{S}^3$ is connected.  Is $\mathbb{S}^3$ path connected?  Discuss.
 \end{prob}
 \begin{soln}
+    It is well known that we can write any point  $p\in \S^2$ with spherical coordinates like so:
+    \begin{align*}
+        x&= \cos(\theta)\sin(\phi)\\
+        y&=\sin(\theta)\sin(\phi)\\
+        z&= \cos(\phi)
+    \end{align*}
+    Where $\theta\in [0,2\pi)$ and $\phi\in [0,\pi)$. To parametrize $\S^3$ we introduce a new parameter $\psi\in [0,\pi)$ and map  $\psi$ to a scaled copy of $\S^2$ like so:
+    \begin{align*}
+        x&= \cos(\theta)\sin(\phi)\textcolor{green}{\sin(\psi)}\\
+        y&=\sin(\theta)\sin(\phi)\textcolor{green}{\sin(\psi)}\\
+        z&= \cos(\phi)\textcolor{green}{\sin(\psi)}\\
+        w&= \textcolor{green}{\cos(\psi)}
+    \end{align*}
+    Any two points $p,p'$  on $\S^3$ can be written in cartesian coordinates, for example $p=(x,y,z,w)$:
+    \begin{align*}
+        \theta&= \atan(x,y)\\
+        \phi &= \acos\left(z/\sqrt{x^2+y^2}\right)\\
+        \psi &= \acos\left(w/\sqrt{x^2+y^2+z^2}\right)
+    \end{align*}
+    The set $[0,2\pi)\times[0,\pi)^2$ is path connected, and this path connects any two points on $\S^3$.  
 
 \end{soln}
 \vspace{1in}
@@ -112,6 +151,16 @@ Is the set $\mathbb{K}$ homeomorphic to $\mathbb{H}$? Explain.
 \end{prob}
 \begin{soln}
 
+            \begin{figure}
+  \centering
+    \includegraphics[width=0.5\textwidth]{figs/earing.pdf}
+  \caption{Polar graph of $\HP_+$}
+\end{figure}
+            \begin{figure}
+  \centering
+    \includegraphics[width=0.5\textwidth]{figs/double.pdf}
+                \caption{Graph of $\HP$}
+\end{figure}
 \end{soln}
 \vspace{1in}
 
