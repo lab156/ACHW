@@ -22,9 +22,11 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\X}{\mathbb{X}}
 \newcommand{\Y}{\mathbb{Y}}
+\newcommand{\J}{\mathbb{J}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\M}{\mathbb{M}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
 \renewcommand{\S}{\mathbb{S}}
 \newcommand{\E}{\mathbb{\emptyset}}
 \newcommand{\F}{\mathbb{F}}
@@ -68,16 +70,16 @@ Let $\mathbb{X}$ be the polar curve in $\mathbb{R}^2$, given in polar co-ordinat
 \end{prob}
 \begin{soln}
 \begin{itemize}\item Sketch the curves $\mathbb{X}$ and $\mathbb{Y}$.
-            \begin{figure}
-  \centering
-    \includegraphics[width=0.5\textwidth]{figs/spiral.pdf}
-  \caption{Polar graph of $r=1- \pi/\theta$}
-\end{figure}
-            \begin{figure}
-  \centering
-    \includegraphics[width=0.5\textwidth]{figs/topol.pdf}
-                \caption{Graph of $y = \sin(\pi/x)$}
-\end{figure}
+%            \begin{figure}
+%  \centering
+%    \includegraphics[width=0.5\textwidth]{figs/spiral.pdf}
+%  \caption{Polar graph of $r=1- \pi/\theta$}
+%\end{figure}
+%            \begin{figure}
+%  \centering
+%    \includegraphics[width=0.5\textwidth]{figs/topol.pdf}
+%                \caption{Graph of $y = \sin(\pi/x)$}
+%\end{figure}
         \item First we show that the maps $f(\theta) = (1-\pi/\theta, \theta)$ and $g(x) = (x,\sin(\pi/x)$ where $\theta\geq \pi$ and $0<x\leq 1$ are both homeomorphisms by proving they are continuous, injective and their inverse is continuous. 
             
             For both cases, $f$ and $g$ are continuous because each of its component functions are continuous (on its respective domains). Also, both functions are injective because  the second component of $f(\theta) $ and the first one of $g(x)$ are just the identity. The inverse of $f$ and $g$ are just the second and first projection respectively, therefore they are both continuous. 
@@ -108,6 +110,8 @@ Let $\mathbb{X}$ be the polar curve in $\mathbb{R}^2$, given in polar co-ordinat
 The unit three-sphere $\mathbb{S}^3$, center the origin is the subset of $\mathbb{R}^4$, with Cartesian co-ordinates $(t, x, y, z) \in \mathbb{R}^4$ given by the equation $t^2 + x^2 + y^2 + z^2 = 1$.  \\Prove that $\mathbb{S}^3$ is connected.  Is $\mathbb{S}^3$ path connected?  Discuss.
 \end{prob}
 \begin{soln}
+    We will show that the set is path connected, this means it is connected. 
+
     It is well known that we can write any point  $p\in \S^2$ with spherical coordinates like so:
     \begin{align*}
         x&= \cos(\theta)\sin(\phi)\\
@@ -127,7 +131,7 @@ The unit three-sphere $\mathbb{S}^3$, center the origin is the subset of $\mathb
         \phi &= \acos\left(z/\sqrt{x^2+y^2}\right)\\
         \psi &= \acos\left(w/\sqrt{x^2+y^2+z^2}\right)
     \end{align*}
-    The set $[0,2\pi)\times[0,\pi)^2$ is path connected, and this path connects any two points on $\S^3$.  
+    The set $[0,2\pi)\times[0,\pi)^2$ is path connected, and this path connects any two points on $\S^3$.  Since the set is path connected, it is also connected.
 
 \end{soln}
 \vspace{1in}
@@ -150,17 +154,27 @@ Is the set $\mathbb{K}$ homeomorphic to $\mathbb{H}$? Explain.
 
 \end{prob}
 \begin{soln}
+%
+%            \begin{figure}
+%  \centering
+%    \includegraphics[width=0.5\textwidth]{figs/earing.pdf}
+%  \caption{Polar graph of $\HP_+$}
+%\end{figure}
+%            \begin{figure}
+%  \centering
+%    \includegraphics[width=0.5\textwidth]{figs/double.pdf}
+%                \caption{Graph of $\HP$}
+%\end{figure}
 
-            \begin{figure}
-  \centering
-    \includegraphics[width=0.5\textwidth]{figs/earing.pdf}
-  \caption{Polar graph of $\HP_+$}
-\end{figure}
-            \begin{figure}
-  \centering
-    \includegraphics[width=0.5\textwidth]{figs/double.pdf}
-                \caption{Graph of $\HP$}
-\end{figure}
+    Both $\HP_+$ and $\HP$ are path connected spaces. These is because all the circles share the origin. More specifically if $x,y\in\HP$ (the proof is identical for $\HP_+$) then these points have to be in some circle say $x\in \C_{1/p}$ and $y\in \C_{1/q}$. Then we can join the path that goes from $x$ to (0,0) through $\C_{1/p} $ with the path that goes from $(0,0)$ to $\C_{1/q}$. Being path connected, the sets are also connected.
+
+    $\HP$ and $\HP_+$ are homeomorphic. An example of a homeomorphism is the map that reflects the circles with even radius across the $y-$axis.
+
+    $\J$ is homeomorphic to $\HP_+$ as it is just the inversion through $\C_1$ (we represent the points as the complex number $z$ for convenience)
+    $$I(z) = 1 + \frac 1{\bar z - 1}$$ 
+    We showed above that $\HP_+$ and $\HP$ are homeomorphic so we conclude that $\J$ and $\HP$ are also homeomorphic. 
+
+    The sets $\K$ and $H$ are not homeomorphic one reason being that $\K$ contains an open set of $\R^2$ (the whole open circle centered at 1 of radius 1, for example), while $\HP$ does not.
 \end{soln}
 \vspace{1in}
 
@@ -169,7 +183,17 @@ Is the set $\mathbb{K}$ homeomorphic to $\mathbb{H}$? Explain.
 Let $\mathbb{M}$ be the space of all continuous maps $f:[0, 1] \rightarrow \mathbb{R}$, equipped with the distance formula $d(f,g ) =  \sup\{ |f(x) - g(x)|:  x \in [0, 1]\}$.  \\Prove that $d$ gives the space $\mathbb{M}$ a metric.   \\For $n$ a positive integer, let $f_n(x) = x^n$, defined for any $x\in [0, 1]$. \\ Prove that the sequence $\mathbb{F} = \{f_n: n \in \mathbb{N}\}$ has no convergent subsequence. \\ Is $\mathbb{F}$ a Cauchy sequence? Explain. 
 \end{prob}
 \begin{soln}
-
+First we show it is a metric:
+    \begin{enumerate}
+        \item For any $f,g\in \M$, we have that $f-g$ is also continuous on $[0,1]$. And, since this is a compact subset of $\R$, $|f-g|$ attains a max value on the interval. This means that $d(f,g)$ exists and is well-defined on all of $\M$. 
+        \item Symmetry  and nonnegativeness of $d$ comes from the absolute value since:
+            $$|f-g| = |g-f|\geq 0$$
+        \item  If $f\neq g$ then there exists $x\in [0,1]$ such that $f(x)-f(x)>0$. Therefore, $d(f,g)>0$. 
+        \item For all $x\in [0,1]$ and all $f,g,h\in \M$ we have that:
+            $$|f(x) - g(x)| \leq |f(x)-h(x)| + | h(x) - g(x)|$$
+            including the value  $x_0$ where $d(f,g)$ is attained. Then we can conclude the triangle inequality by observing:
+            $$d(f,g) \leq |f(x_0) - h(x_0)| + | h(x_0) - g(x_0)| \leq d(f,h) + d(h,g)$$
+    \end{enumerate}
 \end{soln}
 \vspace{1in}
 
