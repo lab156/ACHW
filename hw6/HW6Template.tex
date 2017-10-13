@@ -193,6 +193,20 @@ First we show it is a metric:
             $$|f(x) - g(x)| \leq |f(x)-h(x)| + | h(x) - g(x)|$$
             including the value  $x_0$ where $d(f,g)$ is attained. Then we can conclude the triangle inequality by observing:
             $$d(f,g) \leq |f(x_0) - h(x_0)| + | h(x_0) - g(x_0)| \leq d(f,h) + d(h,g)$$
+
+            For any point $0\leq x <1$ we have that when $n\to \infty$, $x^n\to 0$. This implies that any convergent subsequence of $\{ f_n \}$ would have to converge to $f(0)=0$ for all $0\leq x<1$. Also, $f$ needs to be continuous  and this means that $f =0$. On the other hand, for all $n\in \N$ we have that: $f_n(1)=1$ then any subconverging sequence would have to converge to a function $f$ that also satisfies this condition. This gives a contradiction as $f(1)=0$ and $f(1)=1$.
+
+            The sequence $f_n$ is not Cauchy with this metric. To see this we find the max of $x^n-x^m$ in the interval. The critical point are:
+            $$nx^{n-1} - mx^{m-1}=0$$
+            Assuming that $n>m$ and that $x\neq 0$ we get that:
+            $$ x=\left( \frac mn\right)^{\frac 1{n-m}}$$
+            Since the function $x^n-x^m$ is continuous and is zero at $x=0,1$ the distance has to be positive at some point $0<x<1$. Substituting this value in the original equation:
+            $$\left( \frac mn\right)^{\frac n{n-m}}-\left( \frac mn\right)^{\frac m{n-m}}= \left( \frac mn\right)^{\frac m{n-m}}\left( \frac mn - 1\right)$$
+            And taking $n=m^2$ and $m\to \infty $ we get:
+            $$\left(\frac 1m \right)^{\frac 1{m-1}}\left(1/m - 1\right)$$
+            And this goes to -1 when $m\to \infty$ (with the absolute value it would go to 1).
+
+
     \end{enumerate}
 \end{soln}
 \vspace{1in}
