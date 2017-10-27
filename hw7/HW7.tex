@@ -1,0 +1,148 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,color,amssymb,amsthm,mathrsfs,verbatim,tikz,graphicx}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{enumerate}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{fact}{Fact}
+\newtheorem{example}{Example}
+\newtheorem*{ex}{Exercise}
+\newtheorem*{soln}{Solution}
+\newtheorem*{prob}{Problem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{theorem}
+\newtheorem{thm}{Theorem}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\M}{\mathbb{M}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\E}{\mathbb{\emptyset}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Proj}{\mathbb{P}}
+\newcommand{\HP}{\mathbb{H}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Pic}{\mbox{Pic}}
+\newcommand{\Div}{\mbox{Div}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\atan}{\operatorname{atan2}}
+\newcommand{\acos}{\operatorname{acos}}
+
+
+\begin{document}
+
+\title{Advanced Calculus HW 7 - Due October 27, 4pm}
+\author{Luis Berlioz}
+\maketitle
+
+
+
+\begin{prob}[1]
+    Suppose that $f:\ \R^m \to \R$ satisfies two conditions:
+    \begin{enumerate}[(i)]
+        \item For each compact set $K$, $f(K)$ is compact.
+        \item For every nested decreasing sequence of compacts $(K_n)$,
+            $$f(\cap K_n)  \cap f(K_n)$$
+            Prove that $f$ is continuous.
+    \end{enumerate}
+\end{prob}
+\begin{soln}
+    Take any point $x\in \R^m$. Consider the family of closed and thus compact balls $B_{1/n }(x)$ i.e. the closed ball of radius $1/n$ centered at $x$. Then we have that:
+    $$\cap_{k\in \N }B_{1/n }(x) =\{x  \}$$
+    The compact sets $f(B_{1/n }(x))$ are nested, this means that they satisfy the finite intersection condition. Thus, the whole intersection is nonempty and since $f(x)\in B_{1/n }(x)$ for all $n\in \N$.
+    $$f\left(\cap_{k\in \N }B_{1/n }(x)\right)= \cap_{k\in \N }f(B_{1/n }(x))=\{ f(x)\} $$
+    Lastly, for any $\epsilon >0$ there exists an $N\in \N$ such that if $n\geq N$, then 
+    $$f(B_{1/n }(x)) \subset B_\epsilon (f(x))  $$
+    To show this, let $y\in f\left(\cap_{k\in \N }B_{1/n }(x)\right) = \{f(x)  \}$ and $y\notin B_\epsilon (f(x))$ therefore $y=f(x)$ and $| y-f(x)| >\epsilon$, a contradiction.
+\end{soln}
+\vspace{1in}
+
+
+
+\begin{prob}[2]
+    Let $X\subset \R^m$ be compact and $f:\ X\to \R$ be continuous. Given $\epsilon > 0$, show that there is a constant $M$ such that for all $x,y\in X$ we have $|f(x) -f(y)| \leq M|x-y| + \epsilon$. 
+\end{prob}
+\begin{soln}
+    Since $f$ is continuous on a compact subset of $\R$, then it is uniformly continuous. This means that for all $\epsilon >0$ there exists $\delta >0$ such that for any $x,y\in K$:
+    $$|x-y|<\delta \implies |f(x) -f(y)|<\epsilon$$
+    Also, the function $dist:\ K\times K \to \R$ defined as:
+    $$dist(x,y) = |f(x) - f(y)|$$ 
+    is continuous on the compact set $K\times K$, this means it attains  a maximum there, namely $R = \max_{(x,y)\in K\times K }dist(x,y)$. Take $M = R/\delta$, and observe that if $|x-y| \geq \delta$ then:
+    $$|x-y| \frac R\delta \geq R \geq |f(x) -f(y)|$$
+    Otherwise, if $|x-y|<\delta$ then $|f(x)-f(y)|< \epsilon$. In either case we have:
+    $$|f(x)-f(y)| \leq M|x-y| +\epsilon$$
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[5]
+    Prove that a continuous function $f:\R \to \R$ which sends open sets to open sets must be monotonic.
+\end{prob}
+\begin{soln}
+We prove the counterpositive. Assume that $f$ is not monotonic, WLOG, say there exists $x<y<z$ such that $f(x)>f(y)<f(z)$. On the compact interval $[x,z]\subset \R$, $f$ attains a minimum at say $y_0$ so that:
+    $$f(y_0)\leq f(y)<f(x) \text{ and } f(z)$$
+    By the intermediate value property, $f(]x,z[) = [f(y_0),M[$, where $M=\max\{f(x),f(z)  \}$. Therefore $f(]x,z[)$ is not open.
+\end{soln}
+\vspace{1in}
+
+
+
+\begin{prob}[12]
+Let $X$ be a nonempty connected set of real numbers. If every element of $X$ is rational prove that $X$ has only one element.
+\end{prob}
+\begin{soln}
+    Suppose for the sake of contradiction  that $X$ has two or more elements, say $x< y$. There is an irrational number $z$ such that $x<z<y$. Therefore we have the open sets in $X$:  $x\in ]-\infty, z[ \cap X$ and  $y\in ]z,\infty[\cap X$ whose union is $X$, a contradiction.
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[14]
+    Assume that $f:\ \R\to \R$ is uniformly continuous. Prove that there are constants $A,B$ such that $|f(x)| \leq A+B|x|$ for all $x\in \R$. 
+\end{prob}
+\begin{soln}
+    Take $\delta>0$ such that for any $x,y\in \R$, $|x-y|<\delta$ implies that $|f(x)-f(y)|<1$. Take $x_0,x_1,\ldots, x_n\in \R$ such that:
+    $$0=x_0<|x_1|<|x_2|<\ldots < |x_{n-1 }|<|x|\leq  |x_n|$$
+    Where $|x_i - x_{i-1 }|<\delta$. Observe that $(n-1)\delta < |x|$ therefore $n<x/\delta +1$. Then we have:
+    $$|f(x)| - |f(0)| \leq |f(x)-f(0)| \leq \sum_{i=1 }^n |f(x_i)-f(x_{i-1 })|<n<\frac{|x|}{\delta} + 1$$
+    Therefore we can take $A=1+|f(0)|$ and $B=1/\delta$.
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[6]
+    Let $\{U_k  \}$ be a cover of $\R^m$ by open sets. Prove that there is a cover $\{V_k  \}$ of $\R^m$ by open sets $V_k$ such that $V_k \subset U_k$ and each compact subset of $\R^m$ is disjoint from all but finitely many of the $V_k$.
+\end{prob}
+\begin{soln}
+    Let $B_n$ be the closed ball of radius $n\in \N$ with center 0. Using that $B_n$ is compact, we define $\{V_k  \}$ inductively like so: For $B_1$ take a finite subcovering of $\{U_{k_j } :\ j=1,\ldots N_1 \}$ that covers $B_1$. Define $V_{k_j }=U_{k_j }$ for all $1\leq j \leq N_1$ and $V_k = \E$ for the rest of the indices.
+
+    Assume that for $B_n$ we have defined a subcovering $\{U_{k_j } :\ j=1,\ldots N_n \}$. Then for $B_{n+1 }$  we take a finite subcovering of:
+     $$B_{n+1 }\backslash \bigcup_{j\leq N_n }U_{k_j }$$
+     and append these to the existing covering to get $\{U_{k_j } :\ j=1,\ldots N_{n+1 } \}$. Next take $V_k=\E$ for all $k$ not equal to any $k_j$.
+
+     Finally, Any compact subset say $K\subset of \R^m$ is bounded so that it is contained in some $B_n$. By construction, only a finite number of nonempty $V_k$ intersect  and cover $B_n$ and thus also cover $K$.
+\end{soln}
+\vspace{1in}
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
