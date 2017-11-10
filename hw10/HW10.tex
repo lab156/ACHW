@@ -1,0 +1,155 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,color,amssymb,amsthm,mathrsfs,verbatim,tikz,graphicx}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{enumerate}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{fact}{Fact}
+\newtheorem{example}{Example}
+\newtheorem*{ex}{Exercise}
+\newtheorem*{soln}{Solution}
+\newtheorem*{prob}{Problem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{theorem}
+\newtheorem{thm}{Theorem}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\M}{\mathbb{M}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\E}{\mathbb{\emptyset}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Proj}{\mathbb{P}}
+\newcommand{\HP}{\mathbb{H}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Pic}{\mbox{Pic}}
+\newcommand{\Div}{\mbox{Div}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\atan}{\operatorname{atan2}}
+\newcommand{\acos}{\operatorname{acos}}
+
+
+\begin{document}
+
+\title{Advanced Calculus HW 10 - Due October 27, 4pm}
+\author{Luis Berlioz}
+\maketitle
+
+
+
+\begin{prob}[\#11 page 199]
+    Let $f:\ (a,b) \to \R$ be given.
+    \begin{enumerate}[(a)]
+        \item If $f''(x)$ exists, prove that:
+            $$\lim_{h\to 0} \frac{f(x-h) - 2 f(x) + f(x+h)}{h^2} = f''(x)$$
+        \item Find an example that this limit can even when $f''(x)$ fails to exist.
+    \end{enumerate}
+\end{prob}
+\begin{soln}
+    \begin{enumerate}[(a)]
+        \item By the Taylor Approximation Theorem:
+            \begin{gather*}
+                f(x+h) = f(x) +f'(x)h+f''(x)h^2/2 + R_1(h)\\
+                f(x-h) = f(x) -f'(x)h+f''(x)h^2/2 + R_2(h)
+            \end{gather*}
+            Adding these two equation gives: 
+            $$f(x+h) - 2f(x) +f(x-h) -R_1(h) - R_2(h) = f''(x)h^2$$
+            Using that for $i=1,2$, $R_i(h)/h^2 \to 0$ when $h\to 0$ we get:
+            $$\lim_{h\to 0} \frac{f(x-h) - 2 f(x) + f(x+h)}{h^2} = f''(x)$$
+        \item Let $f(x) = |x|x$ for all $x\in \R$, then $f'(x) =2|x|$  and therefor $f''$ does not exist at $x=0$. Nevertheless, the limit does exist:
+            $$\lim_{h\to 0} \frac{f(0-h) - 2 f(0) + f(0+h)}{h^2} = \lim_{h\to 0 } \frac{-h^2+h^2}{h^2} = 0$$
+    \end{enumerate}
+\end{soln}
+\vspace{1in}
+
+
+
+\begin{prob}[\#16 page 199]
+    $\log(x)$ is defined to be $\int_1^x 1/t\, dt$ for $x>0$. Using only the mathematics explained in this chapter,
+    \begin{enumerate}[(a)]
+        \item Prove that $\log$ is a smooth function.
+        \item Prove that $\log(x\,y) = \log x + \log y$ for all $x,y>0$. [Hint: Fix $y$ and define $f(x) = \log(x\, y) - \log x - \log y$. Show that $f(x) \equiv 0$.]
+        \item Prove that $\log$ is strictly monotone increasing and its range is all of $\R$.
+    \end{enumerate}
+\end{prob}
+\begin{soln}
+    \begin{enumerate}[(a)]
+        \item By the Fundamental Theorem of Calculus and since $1/t$ is continuous for all $t> 0$:
+            $$\frac d{dx} \log x = 1/x$$
+
+        \item First we show that $d\, x^n/dx = n x^{n-1 }$ by induction. For $n=1$, it is a linear function with constant slope 1. Assume that $d\, x^n/dx = n x^{n-1 }$, then using the Leibniz Formula:
+            $$\frac{d\, x^{n+1}}{dx^n} = \frac{d\, x\, x^{n}}{dx^n} = x^n + x \, n\,x^{n-1 } = (n+1)x^n$$
+            Next,  by the quotient rule:
+            $$\left(\frac 1{x^n}\right)' = \frac{-n\,x^{n-1 }}{x^{2n }}= \frac{-n}{x^{n+1 }}$$
+            Then for $n\geq 1$:
+            $$\frac{d^{n }\, f(x)}{dx} = \frac{(-1)^{n+1 }(n-1)!}{x^n}$$
+            Therefore, $f$ is a smooth function on $x>0$.
+        \item Following the hint:
+            $$\frac{d\, \log(x\,y)}{dx} = \frac y{x\, y} - \frac 1x = 0$$
+            Then $\log (y\,x)- \log(x) -\log(y)$ is constant. And since it is zero when $x=1$; it is zero for all $x> 0$.
+
+        For all $x> 1$, $1/x>0$, therefore $\log(x)$ is monotone increasing. 
+
+            This means that $\log(2)>\log(1)=0$. And this implies that $\log(2^n) = n\log(2)$ for all $n\in\Z$ is unbounded. Then for all $y\in  \R$ there exists $n\in \Z$ such that $n\log(2) \leq y \leq (n+1)\log(2)$. Finally $\log(x)$ is an antiderivative and so it is continuous. Then it satisfies the intermediate value property and there exists $x\in \R$ such that $\log(x)=y$.
+
+    \end{enumerate}
+ 
+\end{soln}
+\vspace{1in}
+
+
+\begin{prob}[\# 40  page 205]
+    Set:
+    $$ f(x) = \begin{cases} 0 & \text{ if } x\leq 0\\
+    \sin\frac \pi x & \text{ if } x>0\end{cases}\quad \text{ and }\quad g(x) =\begin{cases} 0 & \text{ if } x\leq 0\\
+    1 & \text{ if } x>0\end{cases}  $$ 
+    Prove that $f$ has an antiderivative but $g$ does not.
+\end{prob}
+\begin{soln}
+    Observe that $f$ is bounded and it is only discontinuous at $x=0$. This means that it satisfies the hypothesis of the Lebesgue-Riemann theorem. Then $f$ is an integrable function and thus by the fundamental theorem of calculus it has an antiderivative. 
+
+    On the other hand if $g$ were to have an antiderivative, then it would satisfy the intermediate value property. Since it does not for $0<y<1$ then it does not have an antiderivative.
+\end{soln}
+\vspace{1in}
+
+
+
+\begin{prob}[\# 62  page 208]
+    Prove that if the terms of a sequence decrease monotonically, $a_1 \geq a_2\geq \ldots$, and converge to 0 then the series $\sum a_k$ converges if and only if the associated dyadic series:
+    $$a_1 + 2a_2 +4a_4 +8a_8 + \cdots = \sum 2^k a_{2^k }$$
+    converges. (I call this the \textbf{block test} because it groups the terms of the series in blocks of length $2^{k-1 }$.)
+\end{prob}
+\begin{soln}
+    That the $a_k$ are a monotinically decreasing sequence implies that for all $k>0$:
+    $$ \sum_{j= 2^{k-1 }}^{2^k-1 }a_j \geq \sum_{j=2^{k-1 } }^{2^k-1 }a_{2^k } = (2^{k-1 }-1)a_{2^k }$$
+    We call $s_k=\sum_{j= 2^{k-1 }}^{2^k-1 }a_j$ (this is the sum on the left above). Then for all $k>0$:
+    $$2(s_k + a_{2^k }) \geq 2^ka_{2^k }$$
+    Observe that $\sum s_k = \sum a_k$ (where we sum over $k>0$). Then if we assume that $\sum a_k$ converges then $\sum a_{2^k }$ also converges since it is a subset of an absolute converging sequence. Therefore  $\sum 2^k a_{2^k }$ converges.
+
+    On the other hand, for $k >0$:
+    $$a_{2^k }2^k \geq \sum_{j=2^k }^{2^{k+1 } }a_j \geq \sum_{j=2^k }^{2^{k+1 }-1 }a_j = r_k $$
+    Assuming that $\sum a_{2^k }2^k $ converges implies that $\sum r_k = \sum a_k$ converges.
+\end{soln}
+\vspace{1in}
+
+\end{document}
+
+
+
+
+
+
+
+
