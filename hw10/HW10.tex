@@ -125,6 +125,28 @@
 \vspace{1in}
 
 
+\begin{prob}[\# 36  page 204]
+    Generalizing Exercise 1.31, we say that $f:\ (a,b) \to \R$ has a \textbf{jump discontinuity} (or a discontiuity of the \textbf{first kind}) at $c\in (a,b)$ if:
+    $$f(c^-) = \lim_{x\to c^- }f(x) \quad \text{and} f(c^+) = \lim_{x\to c^+ }f(x)$$
+    exist, but are either unequal or are unequal to $f(c)$. (The three quantities exist and are equal if and only if $f$ is continuous at c.) An \textbf{oscillating discontinuity } (or a discontinuity of the \textbf{second kind} is any nonjump discontinuity.
+    \begin{enumerate}[(a)]
+        \item Show that $f:\ \R \to \R$ has at most countable many jump discontinuities.
+        \item What about the function
+            $$f(x) = \begin{cases} \sin \frac 1x & \text{if } x>0 \\
+            0 & \text{if } x\leq 0 \end{cases}$$
+        \item What about the characteristic function of the rationals?
+    \end{enumerate}
+\end{prob}
+\begin{soln}
+    \begin{enumerate}[(a)]
+        \item If $f$ has a jump discontinuity at $c$, then $f(c^-) < f(c^+)$ or $f(c^+) < f(c^-)$. In either case, there exists a rational number $q$ between these two values. Next, take $N\in \N$ such that if $n>\N$ then:
+            $$f(c-1/n) < q < f(c+1/n) \quad \text{or} \quad f(c-1/n) > q > f(c+1/n)$$
+            The pairs $(N,q)$ enables to individualize each discontinuity. Since the set $(N,q)\in \N\times \Q$ is countable, then the set of all discontinuities is also countable.
+        \item The function $f$ has an oscillating discontinuity at zero and is contuous on the rest of the real line. This is because $f(0^+)$ does not exist since for all $\delta>0$ there are $0<x_1<x_2<\delta$ such that $f(x_1)=1$ and $f(x_2)=-1$.
+        \item Since both the set of rationals and irrationals are dense in $\R$, the limits at every point fail to exist. This means that there is an oscillating discontinuity at every point. 
+    \end{enumerate}
+\end{soln}
+\vspace{1in}
 
 \begin{prob}[\# 62  page 208]
     Prove that if the terms of a sequence decrease monotonically, $a_1 \geq a_2\geq \ldots$, and converge to 0 then the series $\sum a_k$ converges if and only if the associated dyadic series:
