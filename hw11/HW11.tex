@@ -58,10 +58,17 @@
 \end{prob}
 \begin{soln}
     \begin{enumerate}[(a)]
-        \item If $f(0)=0$, then $x=0$ is a fixed point of $f$. In the case $f(0)>0$, then by the mean value theorem for all $x>0$:
-            $$f(x) - f(0) = f'(c)x < Lx < -x$$
+        \item If $f(0)=0$, then $x=0$ is a fixed point of $f$. In the case $f(0)>0$, then by the mean value theorem for all $x>0$ there exists a $0< c< x$ such that:
+            $$f(x) - f(0) = f'(c)x < Lx < x$$
             This implies that:
-            $$f(x) -x < f(x) -2x$$
+            $$f(x) -x < f(0) +(L-1)x$$
+            This shows that  in the interval $[0,f(0)/(1-L)]$, $f(x) -x$ is going from the positive value of $f(0)$ to some negative value at $x=f(0)/(1-L)$. By the intermediate value theorem, which $f(x) - x$ satisfies since it is continuous, $f$ must have a fixed point.
+
+            Similarly for the case $f(0)<0$. For any $x<0$, by the mean value theorem:
+            $$f(x) - f(0) = f'(c)x > Lx > x$$
+            This implies:
+            $$x-f(x) < (L-1)x -f(0)$$
+            Therefore, $f$ has a fixed point in the interval $[f(0)/(1-L), 0]$.
     \end{enumerate}
 \end{soln}
 \vspace{1in}
