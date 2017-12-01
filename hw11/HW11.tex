@@ -94,68 +94,82 @@
         $$\sum_{i\in \N }(b_i-a_i)<\epsilon $$
         The closed intervals $[a_i,b_i]$ for all $i\in \N$ also cover $Z$ and their lengths is also less than $\epsilon$.
     \item[(ii) $\implies$ (iii)] The diameter of a the closed intervals $S_i = [a_i, b_i]$ is $b_i -a_i$. If we take the same collection of intervals $[a_i,b_i]$ as above then we have a countable covering $S_i$ for all $i\in \N$ such that $\sum diam\, S_i <\epsilon$.
-    \item[(iii)$\implies$ (i)] For any covering of $Z$ by sets $S_i$ for all $i\in \N$, for every $z\in Z$ there exists $S_j$ such that $z\in S_j$.  Let $a_j= \inf S_j$ and $b_j = \inf S_j$. This means that $diam \, S_j = b_j-a_j$ and that $S_j \subset ]a_j, b_j[$. Lastly, by hypothesis for all $\epsilon >0$  there exists a covering $S_i$  and sequences $a_i$ and $b_i$ defined as above such that:
+    \item[(iii)$\implies$ (i)] For any covering of $Z$ by sets $S_i$ for all $i\in \N$, for every $z\in Z$ there exists $S_j$ such that $z\in S_j$.  Let $a_j= \inf S_j$ and $b_j = \sup S_j$. This means that $diam \, S_j = b_j-a_j$ and that $S_j \subset ]a_j, b_j[$. Lastly, by hypothesis for all $\epsilon >0$  there exists a covering $S_i$  and sequences $a_i$ and $b_i$ defined as above such that:
         $$\sum (b_i - a_i) = \sum diam\, S_i < \epsilon$$
 \end{description}
 \end{soln}
 \vspace{1in}
 
 
-\begin{prob}[\# 40  page 205]
-    Set:
-    $$ f(x) = \begin{cases} 0 & \text{ if } x\leq 0\\
-    \sin\frac \pi x & \text{ if } x>0\end{cases}\quad \text{ and }\quad g(x) =\begin{cases} 0 & \text{ if } x\leq 0\\
-    1 & \text{ if } x>0\end{cases}  $$ 
-    Prove that $f$ has an antiderivative but $g$ does not.
+\begin{prob}[\# 37  page 205]
+    Suppose that $f: \R \to \R$ has no jump dicontinuities. Does $f$ have the intermediate value property? (Proof of counterexample)
 \end{prob}
 \begin{soln}
-    Observe that $f$ is bounded and it is only discontinuous at $x=0$. This means that it satisfies the hypothesis of the Lebesgue-Riemann theorem. Then $f$ is an integrable function and thus by the fundamental theorem of calculus it has an antiderivative. 
-
-    On the other hand if $g$ were to have an antiderivative, then it would satisfy the intermediate value property. Since it does not for $0<y<1$ then it does not have an antiderivative.
+    Consider the counterexample: $f(x) =sgn(x) + 1/2\sin(1/x)$ when $x\neq 0$ and $f(0)=0$. This function is continuous on all $\R$ except for $x=0$. And at  this point it has an oscillating discontinuity because we have shown in class that the limit when $x\to 0^+$ or $0^-$ of functions similar to $\sin(1/x)$ does not exist. Thus, we conclude that $f$ has no jump discontinuities. Also, $f$ does not have the intermediate value property since even though it has 0  and  1 in its range, it does not go through every number in [0,1], for example 1/4.
 \end{soln}
 \vspace{1in}
 
 
-\begin{prob}[\# 36  page 204]
-    Generalizing Exercise 1.31, we say that $f:\ (a,b) \to \R$ has a \textbf{jump discontinuity} (or a discontiuity of the \textbf{first kind}) at $c\in (a,b)$ if:
-    $$f(c^-) = \lim_{x\to c^- }f(x) \quad \text{and} f(c^+) = \lim_{x\to c^+ }f(x)$$
-    exist, but are either unequal or are unequal to $f(c)$. (The three quantities exist and are equal if and only if $f$ is continuous at c.) An \textbf{oscillating discontinuity } (or a discontinuity of the \textbf{second kind} is any nonjump discontinuity.
+\begin{prob}[\# 46  page 206]
     \begin{enumerate}[(a)]
-        \item Show that $f:\ \R \to \R$ has at most countable many jump discontinuities.
-        \item What about the function
-            $$f(x) = \begin{cases} \sin \frac 1x & \text{if } x>0 \\
-            0 & \text{if } x\leq 0 \end{cases}$$
-        \item What about the characteristic function of the rationals?
+        \item Prove that the integral of the Zeno's staircase function described on page 174 is 2/3.
+        \item What about the Devil's staircase?
     \end{enumerate}
 \end{prob}
 \begin{soln}
     \begin{enumerate}[(a)]
-        \item If $f$ has a jump discontinuity at $c$, then $f(c^-) < f(c^+)$ or $f(c^+) < f(c^-)$. In either case, there exists a rational number $q$ between these two values. Next, take $N\in \N$ such that if $n>\N$ then:
-            $$f(c-1/n) < q < f(c+1/n) \quad \text{or} \quad f(c-1/n) > q > f(c+1/n)$$
-            The pairs $(N,q)$ enables to individualize each discontinuity. Since the set $(N,q)\in \N\times \Q$ is countable, then the set of all discontinuities is also countable.
-        \item The function $f$ has an oscillating discontinuity at zero and is contuous on the rest of the real line. This is because $f(0^+)$ does not exist since for all $\delta>0$ there are $0<x_1<x_2<\delta$ such that $f(x_1)=1$ and $f(x_2)=-1$.
-        \item Since both the set of rationals and irrationals are dense in $\R$, the limits at every point fail to exist. This means that there is an oscillating discontinuity at every point. 
+        \item Let $f(x)$ be the Zeno's staircase function, then it has a countable set of point where it is discontinuous, namely $\{1 - 1/2^n :\ n\in \N \}$. This means that the function is Riemann Integrable. To find the integral we sum up the areas under which the function is constant:
+            $$\sum_{n=1 }^\infty \left(1-\frac 1{2^n}\right)\frac 1{2^n}= \sum_{n=1 }^\infty\frac 1{2^n} - \frac 1{4^n}$$
+            And since both these series are convergent they can be summed individually to get $1- 1/3=2/3$.
+        \item Using the terminology in the textbook, the devil's staircase is given by the function:
+            $$H(x)=\sum_{i=1 }^\infty \frac{\omega_i/2}{2^i}$$
+            When $x$ is in the Cantor set $C$. And $H$ has constant value at the discarded gap intervals. Also, $H$ is continuous therefore it is integrable. 
+
+            To find the value of the integral, observe that for all $0\leq x \leq 1$, $H(x)+ H(1-x) =1$. If $x\in C$ then:
+            $$H(x)+ H(1-x) = \sum_{i=1 }^\infty \frac{\omega_i/2}{2^i} + \sum_{i=1 }^\infty \frac{(2-\omega_i)/2}{2^i} = \sum_{i=1 }^\infty \frac{1}{2^i}= 1$$
+            If $x$ is not in $C$ then it is in one of the discarded intervals which has endpoints that can be written in base 3 using only the symbols 0 and 2 so the above argument also applies. Finally, the integral is then:
+            $$\int_0^1 H(x) dx + \int_0^1 H(1-x)dx = \int_0^1 1dx = 1$$
+            Doing the change of variable: $u = 1-x$, $du = -dx$:
+            $$\int_0^1 H(x) dx - \int_1^0 H(u)du = 2\int_0^1 H(x)dx = 1$$
+And we get that the integral is 1/2.
     \end{enumerate}
 \end{soln}
 \vspace{1in}
 
-\begin{prob}[\# 62  page 208]
-    Prove that if the terms of a sequence decrease monotonically, $a_1 \geq a_2\geq \ldots$, and converge to 0 then the series $\sum a_k$ converges if and only if the associated dyadic series:
-    $$a_1 + 2a_2 +4a_4 +8a_8 + \cdots = \sum 2^k a_{2^k }$$
-    converges. (I call this the \textbf{block test} because it groups the terms of the series in blocks of length $2^{k-1 }$.)
+\begin{prob}[\# 51  page 207]
+    If $f,g$ are Riemann integrable on $[a,b]$,  and $f(x) < g(x)$ for all $x\in [a,b]$, prove that $\int_a^b f(x)dx < \int_a^bg(x)dx$. (Note the \textit{strict} inequality.)
 \end{prob}
 \begin{soln}
-    That the $a_k$ are a monotinically decreasing sequence implies that for all $k>0$:
-    $$ \sum_{j= 2^{k-1 }}^{2^k-1 }a_j \geq \sum_{j=2^{k-1 } }^{2^k-1 }a_{2^k } = (2^{k-1 }-1)a_{2^k }$$
-    We call $s_k=\sum_{j= 2^{k-1 }}^{2^k-1 }a_j$ (this is the sum on the left above). Then for all $k>0$:
-    $$2(s_k + a_{2^k }) \geq 2^ka_{2^k }$$
-    Observe that $\sum s_k = \sum a_k$ (where we sum over $k>0$). Then if we assume that $\sum a_k$ converges then $\sum a_{2^k }$ also converges since it is a subset of an absolute converging sequence. Therefore  $\sum 2^k a_{2^k }$ converges.
+    Assume, to get a contradiction, that $\int_a^b(g(x)-f(x))dx = 0$. Then by corollary 31, $g(x) = f(x)$ almost everywhere. This is  a contradiction since the empty set has measure zero. 
 
-    On the other hand, for $k >0$:
-    $$a_{2^k }2^k \geq \sum_{j=2^k }^{2^{k+1 } }a_j \geq \sum_{j=2^k }^{2^{k+1 }-1 }a_j = r_k $$
-    Assuming that $\sum a_{2^k }2^k $ converges implies that $\sum r_k = \sum a_k$ converges.
+    This means that $\int_a^b(g(x)-f(x))dx > 0$ equivalently:
+    $$\int_a^bg(x)dx > \int_a^bf(x)dx = 0$$
 \end{soln}
 \vspace{1in}
+
+\begin{prob}[\# 59  page 208]
+    Prove that if $a_n\geq 0$ and $\sum a_n$ converges then $\sum(\sqrt{a_n})/n$ converges.
+\end{prob}
+\begin{soln}
+   First note that for all $n\in \N$
+    $$0\leq (\sqrt{a_n}-1/\sqrt n)^2 = a_n - 2\sqrt{a_n}/n + 1/n^2$$
+    Then:
+    $$\sqrt{a_n}/n\leq 1/2(a_n +1/n^2)$$
+    Euler showed in 1734, that $\sum 1/n^2$ converges then $\sqrt{a_n}/n$ also converges.
+\end{soln}
+\vspace{1in}
+
+\begin{prob}[\# 60  page 208]
+    \begin{enumerate}[(a)]
+        \item If $\sum a_n$ converges and $(b_n)$ is monotonic and bounded, prove that $\sum a_nb_n$ converges.
+        \item If the monotonicity condition is dropped, or replaced by the assumption that $\lim_{n\to \infty }b_n =0$, find a counterexample to convergence of $\sum a_n b_n$.
+    \end{enumerate}
+\end{prob}
+\begin{soln}
+\end{soln}
+\vspace{1in}
+
+
 
 \end{document}
 
