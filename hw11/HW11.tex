@@ -170,14 +170,27 @@ And we get that the integral is 1/2.
         \item Observe that $(b_n)$ converges because it is monotonic and bounded. Take $N\in \N$ such that if $n,m>N$ then:
             $$\left|\sum_{k=n }^m a_k \right| <\epsilon \quad \text{and} \quad |b-b_n|<\epsilon<|b|$$
             By the Cauchy criterion for sums. We can then write $a_nb_n = a_n(b-b+b_n)$ and thus
-            $$\left|\sum_{k=n }^m a_kb_k \right| \leq |b|\left|\sum_{k=n }^m a_k \right| + \leftv|\sum_{k=n }^m a_k \right|$$
-
+            $$\left|\sum_{k=n }^m a_kb_k \right| \leq |b|\left|\sum_{k=n }^m a_k \right| + \left|\sum_{k=n }^m a_k \right|$$
+        \item If $a_n = b_n = (-1)^n/\sqrt{n}$ then $b_n \to 0$ when $n\to \infty$, and $\sum a_n$ converges, but the product diverges:
+            $$\sum_{n=1}^\infty \left((-1)^n/\sqrt{n}\right)\left((-1)^n/\sqrt{n}\right) = \sum_{n=1}^\infty \frac 1{n}$$
     \end{enumerate}
 
 \end{soln}
 \vspace{1in}
 
-
+\begin{prob}[\# 64  page 208]
+    Concoct a series $\sum a_k$ such that $(-1)^ka_k>0, \ a_k\to 0$, but the series diverges.
+\end{prob}
+\begin{soln}
+Consider the sequence:
+    $$a_n = \begin{cases} \frac{1}{(n-1)/2}, n\text{ is odd}\\
+    -e^{-n/2}, n\text{ is even} \end{cases} $$
+    Then the sign of $a_k$ alternates as $k$ changes from even to odd. Also, $b_k\to 0$ when $k\to \infty$. The series can be written as:
+    $$\sum a_k = \sum_{n=1}^\infty \left( \frac{1}{n} - e^{n}\right)$$
+    Which diverges because the integral diverges:
+    $$\int_1^\infty \left( 1/x -e^{-x}\right)dx = \left. \left( \ln x +e^{-x}\right)\right|_1^\infty= \infty $$
+\end{soln}
+\vspace{1in}
 
 \end{document}
 
