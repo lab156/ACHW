@@ -166,6 +166,14 @@ And we get that the integral is 1/2.
     \end{enumerate}
 \end{prob}
 \begin{soln}
+    \begin{enumerate}[(a)]
+        \item Observe that $(b_n)$ converges because it is monotonic and bounded. Take $N\in \N$ such that if $n,m>N$ then:
+            $$\left|\sum_{k=n }^m a_k \right| <\epsilon \quad \text{and} \quad |b-b_n|<\epsilon<|b|$$
+            By the Cauchy criterion for sums. We can then write $a_nb_n = a_n(b-b+b_n)$ and thus
+            $$\left|\sum_{k=n }^m a_kb_k \right| \leq |b|\left|\sum_{k=n }^m a_k \right| + \leftv|\sum_{k=n }^m a_k \right|$$
+
+    \end{enumerate}
+
 \end{soln}
 \vspace{1in}
 
