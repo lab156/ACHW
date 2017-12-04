@@ -48,6 +48,28 @@
 \maketitle
 
 
+\begin{prob}[\#1 ]
+     Using appropriate Darboux sums calculate (with proof) the  integrals of
+$\sin(x)$ and $\cos(x)$ taken over an interval $[0, a]$, where $0 < 2a < \pi$.  (Hint: +Euler)
+\end{prob}
+\begin{soln}
+    To compute these sums, consider the partition with endpoints $\{0,\frac \pi n, \frac {2\pi}n, \ldots , \pi\}$ next we consider the sum:
+    $$\sum_{k=0 }^{n-1 }e^{i\frac {k\pi}n }\frac \pi n = \frac {e^{i n\pi/n }-1}{n/\pi(e^{i\frac \pi n -1 })} = \frac {-2}{\frac n\pi(e^{i\frac \pi n -1 })} $$
+    Using fundamental limits from calculus 1, we obtain that when $n\to \infty$:
+    \begin{gather}
+        \frac n\pi (\cos\frac \pi n - 1) \to 0\\
+        \frac n\pi (i\sin(\pi n)) \to i
+    \end{gather}
+    This means that the Darboux sum:
+$$\sum_{k=0 }^{n-1 }e^{i\frac {k\pi}n }\frac \pi n \to -2/i =2i$$
+Finally comparing real and imaginary parts we get that:
+    \begin{gather}
+        \int_0^\pi \cos(x)dx = 0\\
+        \int_0^\pi \sin(x) dx = 2
+    \end{gather}
+
+\end{soln}
+
 
 \begin{prob}[\#9 page 198]
     Assume that $f: \R \to \R$ is differentiable.
@@ -100,6 +122,32 @@
 \end{soln}
 \vspace{1in}
 
+\begin{prob}[\# 31  page 203]
+    Define the Cantor set by removing from [0,1] the middle interval of length 1/4. From the remaining two intervals $F^1$ remove the middle intervals. From the remaining four intervals $F^2$ remove the middle intervals of length 1/64, and so on. At the $n^{\text{th} }$ step in the contruction of $F^n$ consists of $2^n$ subintervals of $F^{n-1 }$.
+    \begin{enumerate}[(a)]
+        \item Prove that $F = \cap F^n$ is a Cantor set but not a zero set. It is referred to as a \textbf{fat Cantor set}.
+        \item Infer that being a zero set is not a topological property: If two sets are homeomorphic and one is a zero set then the other need not be a zero set. [Hint: To get a sense of this fat Cantor set, calculate the total length of the intervals which comprise its complement.]
+    \end{enumerate}
+    \end{prob}
+            \begin{soln}
+    \begin{enumerate}[(a)]
+        \item            To show that $F$ is a Cantor set, we need to show it is compact, infinite, perfect and totally disconnected.
+                \begin{description}
+                    \item[Compact:] Each $F^n$ is compact for all $n\in \N$, the intersection of arbitrary amount of compact set is compact, then $F$ is compact.
+                    \item[Infinite:] The endpoints of the intervals that comprise $F^n$ are an infinite set contained in all $F^n$: $E = \{ 0, 1, 3/8, 5/8,\ldots \}$.
+                    \item[Perfect:] For any $\epsilon>0$ take $n\in \N$ such that the intervals comprising $F^n$ have length less than $\epsilon$. Then if $x\in F$ is contained in some interval $I$ of $F^n$ the intersection of the set of endpoints $E$ and $I$ is infinite. This means that $F$ ``clusters around $x$''.
+
+                    \item[Totally Disconnected:] Every point in $F$ is contained in all the intervals that form $F^n$, this intervals are relatively clopen as subsets of $[0,1]$, since these intervals have arbitrarily short length, $F$ is totally disconnected.
+                \end{description}
+
+                To compute the measure of $F$, we compute the measure of its complement and substract it from 1 which is the measure of $[0,1]$:
+                $$1 - \sum_{k=0 }^\infty \frac{2^k}{4^{k+1 }} = 1-1/4(2) = 1/2$$
+                Then $F$ does not have zero measure.
+
+            \item According to Theorem 73 Moore-Kline in the textbook, All Cantor sets are homeomorphic. This implies that the Cantor middle-third $C$   and the Fat Cantor set $F$ are homeomorphic. Since $C$ is a zero measure set and $F$ is not, we conclude that a homeomorphism is not preserving the zero measure property. A homeomorphism preserves all topological properties so having zero measure is not topological.
+    \end{enumerate}
+            \end{soln}
+\vspace{1in}
 
 \begin{prob}[\# 37  page 205]
     Suppose that $f: \R \to \R$ has no jump dicontinuities. Does $f$ have the intermediate value property? (Proof of counterexample)
@@ -167,12 +215,22 @@ And we get that the integral is 1/2.
 \end{prob}
 \begin{soln}
     \begin{enumerate}[(a)]
-        \item Observe that $(b_n)$ converges because it is monotonic and bounded. Take $N\in \N$ such that if $n,m>N$ then:
-            $$\left|\sum_{k=n }^m a_k \right| <\epsilon \quad \text{and} \quad |b-b_n|<\epsilon<|b|$$
-            By the Cauchy criterion for sums. We can then write $a_nb_n = a_n(b-b+b_n)$ and thus
-            $$\left|\sum_{k=n }^m a_kb_k \right| \leq |b|\left|\sum_{k=n }^m a_k \right| + \left|\sum_{k=n }^m a_k \right|$$
-        \item If $a_n = b_n = (-1)^n/\sqrt{n}$ then $b_n \to 0$ when $n\to \infty$, and $\sum a_n$ converges, but the product diverges:
-            $$\sum_{n=1}^\infty \left((-1)^n/\sqrt{n}\right)\left((-1)^n/\sqrt{n}\right) = \sum_{n=1}^\infty \frac 1{n}$$
+        \item Observe that $(b_n)$ converges because it is monotonic and bounded. In particular this means that $(b_n)$ is a Cauchy sequence.
+           
+            We will call $A_n^m = a_n+ a_{n+1 }+\ldots + a_m$ for all $n,m\in\N$ (with $n\leq m$ ). Next we show that:
+            $$\sum_{k=n }^m A_n^k (b_k-b_{k+1 }) + b_{m+1 }A_n^m  = \sum_{k=n }^{m } a_kb_k$$
+            We prove this by induction over $j = m-n$. When $j=0$, that is, $m=n$, we get:
+            $$a_n(b_n-b_{n+1 })+a_nb_{n+1 } = a_n b_n - a_nb_{n+1 } +a_nb_{n+1 }=a_nb_n$$
+            Next we assume the result for  $m-n = j$ and consider:
+            $$\sum_{k=n }^{m+1 }A_n^k(b_k-b_{k+1 }) + b_{m+2 }A_n^{m+1 }$$
+            $$=\sum_{k=n }^{m }A_n^k(b_k-b_{k+1 }) + A_n^{m+1 }(b_{m+1 }- b_{m+2 })  + b_{m+2 }A_n^{m+1 } $$
+            $$=\sum_{k=n }^{m }A_n^k(b_k-b_{k+1 }) + A_n^{m+1 }b_{m+1 } = \sum_{k=n }^ma_kb_k$$
+            With this result, we proceed to show that $\sum_{k=n }^ma_kb_k$ is a Cauchy sequence and then the series $\sum_{k=1 }^\infty a_kb_k$ converges.
+
+            Take any $\epsilon >0$ and $N\in \N$ such that if $n,m>N$ then By the Cauchy criterion for sums:
+            $$|A_n^m| = \left|\sum_{k=n }^m a_k \right| <\epsilon \quad \text{and} \quad |b_k|<b \text{ for all }k\in \N$$
+            Then 
+            $$\left| \sum_{k=n }^m a_k b_k\right| = \left| \sum_{k=n }^m A_n^k (b_k-b_{k+1 }) + b_{m+1 }A_n^m \right| \leq \epsilon|b_n-b_{m+1 }| + \epsilon b \leq 3\epsilon$$ 
     \end{enumerate}
 
 \end{soln}
